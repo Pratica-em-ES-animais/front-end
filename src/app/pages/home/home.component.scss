@@ -33,12 +33,13 @@
                 display: flex;
                 flex-direction: column;
                 color: #FFF3E6;
+                gap: 10px;
                 .main-phrase{
                     
                     .h1{
                         margin: 0;
                         font-size: 64px;
-                        font-weight: 500;
+                        font-weight: 700;
                     }
                 }
 
@@ -46,7 +47,7 @@
                     .h2{
                         margin: 0;
                         font-size: 20px;
-                        font-weight: 400;
+                        font-weight: 600;
                     }
                 }
 
@@ -84,6 +85,124 @@
         background-image: url('/assets/img/logo_bege.png');
         background-repeat: no-repeat;
         background-position: 50% 50%;
+
+        display: flex;
+        flex-direction: column;
+        
+
+        .top{
+            height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+
+            .h1{
+                margin: 0;
+                font-size: 58px;
+                color: #FFF3E6;
+            }
+        }
+
+        .bottom{
+            height: 360px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 80px;
+
+            .compatibilidade{
+                display: flex;
+                flex-direction: column;
+                width: 340px;
+                .compatibilidade-text{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #FFF3E6;
+                    border-radius: 20px;
+                    height: 180px;
+                    color: var(--primary-purple);
+                    font-size: 30px;
+                    text-align: center;
+                    padding: 0px 10px;
+                    font-weight: 600;
+                }
+
+                .compatibilidade-tittle{
+                    display: flex;
+                    justify-content: center;
+                    color: #FFF3E6;
+
+                    .h2{
+                        font-weight: 600;
+                        font-size: 43px;
+                    }
+                }
+            }
+
+            .clareza{
+                display: flex;
+                flex-direction: column;
+                width: 340px;
+                .clareza-text{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #FFF3E6;
+                    border-radius: 20px;
+                    height: 180px;
+                    color: var(--primary-purple);
+                    font-size: 30px;
+                    text-align: center;
+                    padding: 0px 10px;
+                    font-weight: 600;
+                }
+
+                .clareza-tittle{
+                    display: flex;
+                    justify-content: center;
+                    color: #FFF3E6;
+                    font-size: 30px;
+
+                    .h2{
+                        font-weight: 600;
+                        font-size: 43px;
+                    }
+                }
+            }
+
+            .continuidade{
+                display: flex;
+                flex-direction: column;
+                width: 340px;
+                .continuidade-text{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #FFF3E6;
+                    border-radius: 20px;
+                    height: 180px;
+                    color: var(--primary-purple);
+                    font-size: 30px;
+                    text-align: center;
+                    padding: 0px 20px;
+                    font-weight: 600;
+                }
+
+                .continuidade-tittle{
+                    display: flex;
+                    justify-content: center;
+                    color: #FFF3E6;
+                    font-size: 30px;
+
+                    .h2{
+                        font-weight: 600;
+                        font-size: 43px;
+                    }
+                }
+            }
+        }
     }
 
     .third{
