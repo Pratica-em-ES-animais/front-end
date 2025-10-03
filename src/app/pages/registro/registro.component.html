@@ -1,1 +1,30 @@
-<p>registro works!</p>
+<div class="registro-page">
+    <div class="left">
+        <form [formGroup]="usuarioForm" class="formContainer">
+            <div class="formCard">
+                <div class="formTitle">
+                    <div class="h1">
+                        <h1>Crie sua Conta</h1>
+                    </div>
+                    <div class="h2">
+                        <h3>Preencha os campos abaixo para se cadastrar.</h3>
+                    </div>
+                </div>
+                <div class="formContent">
+                    <span>Nome</span>
+                    <div class="firstRow">
+                        <mat-form-field appearance="outline" class="names">
+                            <input matInput formControlName="primeiroNome" placeholder="Seu nome" >        
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="names">
+                            <input matInput formControlName="sobrenome" placeholder="Seu sobrenome">        
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="right">
+    </div>
+
+</div>
