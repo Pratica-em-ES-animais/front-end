@@ -65,7 +65,7 @@
                         transition: all 0.3s ease;
 
                         &:hover {
-                            background-color: #7a2b5f; // versão manualmente mais escura
+                            background-color: #7a2b5f; 
                             transform: scale(1.05);
                         }
 
@@ -80,7 +80,10 @@
 
     .second{
         background-color: var(--primary-purple);
-        height: 400px;
+        height: 600px;
+        background-image: url('/assets/img/logo_bege.png');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
     }
 
     .third{
