@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 html, body { 
   height: 100%; 
   width: 100%;
@@ -12,4 +14,11 @@ body {
   --primary-purple: #963676;
   --primary-blue: #6EC9E0;
   --primary-yellow: #FCB82E;
+  @include mat.form-field-overrides((
+        outlined-outline-color: var(--primary-purple),
+        outlined-outline-width: 2px,
+        outlined-focus-outline-color: var(--primary-purple),
+        outlined-input-text-placeholder-color: #CC6EA5,
+        outlined-input-text-color: #e467b0
+  ));
 }

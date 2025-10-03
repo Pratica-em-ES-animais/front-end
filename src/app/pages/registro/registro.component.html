@@ -1,28 +1,72 @@
 <div class="registro-page">
     <div class="left">
-        <form [formGroup]="usuarioForm" class="formContainer">
+        <div class="formContainer">
             <div class="formCard">
-                <div class="formTitle">
-                    <div class="h1">
-                        <h1>Crie sua Conta</h1>
-                    </div>
-                    <div class="h2">
-                        <h3>Preencha os campos abaixo para se cadastrar.</h3>
-                    </div>
-                </div>
-                <div class="formContent">
-                    <span>Nome</span>
-                    <div class="firstRow">
-                        <mat-form-field appearance="outline" class="names">
-                            <input matInput formControlName="primeiroNome" placeholder="Seu nome" >        
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" class="names">
-                            <input matInput formControlName="sobrenome" placeholder="Seu sobrenome">        
-                        </mat-form-field>
-                    </div>
+                <form [formGroup]="usuarioForm">
+                        <div class="formTitle">
+                            <div class="h1">
+                                <h1>Crie sua Conta</h1>
+                            </div>
+                            <div class="h2">
+                                <h3>Preencha os campos abaixo para se cadastrar.</h3>
+                            </div>
+                        </div>
+                        <div class="formContent">
+                            <div class="firstRow">
+                                <div class="nome">
+                                    <span>Nome</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="primeiroNome" placeholder="Seu nome" >        
+                                    </mat-form-field>
+                                </div>
+                                <div class="nome">
+                                    <span>Sobrenome</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="sobrenome" placeholder="Seu sobrenome">        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="secondRow">
+                                <span>CPF</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="cpf" placeholder="000.000.000-00" >        
+                                </mat-form-field>
+                            </div>
+                            <div class="thirdRow">
+                                <span>Email</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="email" placeholder="seu@email.com" >        
+                                </mat-form-field>
+                            </div>
+                            <div class="forthRow">
+                                <span>Senha</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="senha" placeholder="Sua senha" >        
+                                </mat-form-field>
+                            </div>
+                            <div class="fifthRow">
+                                <div class="ddd">
+                                    <span>DDD</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="ddd" placeholder="(51)">        
+                                    </mat-form-field>
+                                </div>
+                                <div class="telefone">
+                                    <span>Telefone</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="telefone" placeholder="(9)0000-0000">        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                <div class="buttons">
+                    <button mat-button="filled">Criar Conta</button>
                 </div>
             </div>
-        </form>
+            
+        </div>
+
     </div>
     <div class="right">
     </div>
