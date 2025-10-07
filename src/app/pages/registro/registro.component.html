@@ -1,1 +1,98 @@
-<p>registro works!</p>
+<div class="registro-page">
+    <div class="left">
+        <div class="head">
+            <div class="voltar">
+                <button matSuffix mat-icon-button class="voltar-btn" (click)="redirect($event)">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="logo">
+                <img src="/assets/img/logo_preta.png" alt="Fada Org logo" class="img">
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <div class="formContainer">
+            <div class="formCard">
+                <form [formGroup]="usuarioForm">
+                        <div class="formTitle">
+                            <div class="h1">
+                                <h1>Crie sua Conta</h1>
+                            </div>
+                            <div class="h2">
+                                <h3>Preencha os campos abaixo para se cadastrar.</h3>
+                            </div>
+                        </div>
+                        <div class="formContent">
+                            <div class="firstRow">
+                                <div class="nome">
+                                    <span>Nome*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="primeiroNome" placeholder="Seu nome" class="input">        
+                                    </mat-form-field>
+                                </div>
+                                <div class="nome">
+                                    <span>Sobrenome*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="sobrenome" placeholder="Seu sobrenome" class="input">        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="secondRow">
+                                <span>CPF*</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="cpf" placeholder="000.000.000-00" mask="000.000.000-00" class="input">        
+                                </mat-form-field>
+                            </div>
+                            <div class="thirdRow">
+                                <span>Email*</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="email" placeholder="seu@email.com" class="input">        
+                                </mat-form-field>
+                            </div>
+                            <div class="forthRow">
+                                <span>Senha*</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="senha" placeholder="Sua senha" class="password-input" [type]="pwd() ? 'password' : 'text'">        
+                                    <button type="button" mat-icon-button matSuffix [attr.aria-label]="'Hide password'"  (click)="hidePwd($event)">
+                                    <mat-icon class="hide-icon">{{pwd() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+
+                                </mat-form-field>
+                                 <span>Confirme sua senha*</span>
+                                <mat-form-field appearance="outline" class="text-input" >
+                                    <input matInput formControlName="confirmarSenha" placeholder="Sua senha" class="password-input" [type]="pwdConfirmation() ? 'password' : 'text'">        
+                                    <button type="button" mat-icon-button matSuffix [attr.aria-label]="'Hide password'" (click)="hidePwdConfirmation($event)">
+                                    <mat-icon class="hide-icon">{{pwdConfirmation() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                </mat-form-field>
+                            </div>
+                            <div class="fifthRow">
+                                <div class="ddd">
+                                    <span>DDD*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="ddd" placeholder="(51)" mask="00"class="input">        
+                                    </mat-form-field>
+                                </div>
+                                <div class="telefone">
+                                    <span>Telefone*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="telefone" placeholder="(9)0000-0000" mask="900000000" class="input">        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                <div class="buttons">
+                    <button mat-flat-button type="submit" (click)="submit()" class="send-btn">Criar Conta</button>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <div class="right">
+    </div>
+
+</div>
