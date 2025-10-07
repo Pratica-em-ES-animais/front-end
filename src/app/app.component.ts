@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,11 @@ import { HomeComponent } from './pages/home/home.component';
 })
 export class AppComponent {
   title = 'Front';
+
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  this.matIconRegistry.addSvgIcon(
+    'instagram',
+    this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/icon/instagram.svg')
+  );
+}
 }

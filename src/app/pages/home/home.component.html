@@ -13,8 +13,9 @@
                 <div class="secondary-phrase">
                     <h2 class="h2">Adote animais que são compatíveis com a sua necessidade.</h2>
                 </div>
-                <div class="ver-animai-btn">
-                    <button class="btn-ver-animais">Ver animais</button>
+                <div class="ver-animais-btn">
+                    <button class="btn-entrar">Entrar</button>
+                    <button class="btn-registrar">Registrar-se</button>
                 </div>
             </div>
         </div>
@@ -65,10 +66,40 @@
     </div>
 
     <div class="third">
-        third
+    <div class="third-content">
+        <div class="animal" *ngFor="let a of animais">
+        <div class="animal-pfp">
+            <img class="img" [src]="a.foto" [alt]="a.nome" />
+        </div>
+        <div class="animal-content">
+            <h3 class="h3">{{ a.nome }}</h3>
+            <p class="p">{{ a.especie }} — {{ a.idade }} anos</p>
+            <p class="p">{{ a.descricao }}</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="third-btn">
+        <button class="btn-ver-animais">Ver mais</button>
+    </div>
     </div>
 
     <div class="footer">
-        footer
+        <div class="logo-div">
+            <img class="img" src="/assets/img/logo-branca.png" alt="logo fada org">
+        </div>
+        <div class="info-div">
+            <div class="left">
+                <div class="spam-div">
+                    <a href="https://www.instagram.com/fadaorg/" target="_blank" rel="noopener noreferrer" class="insta-link">
+                        <mat-icon svgIcon="instagram"></mat-icon>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+            <div class="right">
+                <p>2025 &copy;</p>
+            </div>
+        </div>
     </div>
 </div>
