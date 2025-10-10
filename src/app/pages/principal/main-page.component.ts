@@ -7,10 +7,10 @@ import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-principal',
   imports: [MatButton, MatButtonModule],
-  templateUrl: './principal.component.html',
-  styleUrl: './principal.component.scss'
+  templateUrl: './main-page.component.html',
+  styleUrl: './main-page.component.scss'
 })
-export class PrincipalComponent {
+export class MainPageComponent {
   constructor(private dialog : MatDialog){}
   login(){
     const dialogRef = this.dialog.open(LoginComponent, {
