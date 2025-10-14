@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 interface Animal {
   nome: string;
@@ -18,6 +21,8 @@ interface Animal {
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  constructor(private router:Router, private dialog:MatDialog){
+  }
   animais: Animal[] = [
     {
       nome: 'Luna',
@@ -62,4 +67,15 @@ export class HomeComponent {
       descricao: 'Grandão, tranquilo e muito amigo.'
     }
   ];
+
+  redirectTo(address:string){
+    this.router.navigate([`/${address}`]);
+  }
+
+  login() {
+    this.dialog.open(LoginComponent, {
+      height: '70%',
+      width: '50%',
+    });
+  }
 }
