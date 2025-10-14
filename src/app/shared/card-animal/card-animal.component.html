@@ -1,0 +1,12 @@
+<div class="animal-card">
+  <div class="animal-image">
+    <img [src]="animal.foto" [alt]="animal.nome" />
+  </div>
+
+  <div class="animal-info">
+    <h2>{{ animal.nome }}</h2>
+    <p><strong>Espécie:</strong> {{ animal.especie }}</p>
+    <p><strong>Idade:</strong> {{ animal.idade }} anos</p>
+    <p class="descricao">{{ animal.descricao }}</p>
+  </div>
+</div>

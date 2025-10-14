@@ -16,7 +16,7 @@ body {
   --third-purple: #7a2b5f;
   --primary-blue: #6EC9E0;
   --primary-yellow: #FCB82E;
-  --primary-offwhite: #FFF3E6;
+  --primary-offwhite: #fff5ea;
   --secondary-offwhite: #FFEBD5;
   @include mat.form-field-overrides((
         outlined-outline-color: var(--primary-purple),

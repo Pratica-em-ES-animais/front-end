@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { CardAnimalComponent } from "../../shared/card-animal/card-animal.component";
 
 @Component({
   selector: 'app-principal',
@@ -24,7 +25,8 @@ import { LoginComponent } from '../login/login.component';
     MatInputModule,
     MatSliderModule,
     MatDialogModule,
-  ],
+    CardAnimalComponent
+],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
 })
@@ -39,6 +41,53 @@ export class MainPageComponent implements OnInit {
     temperamento: FormControl<string | null>;
     historico: FormControl<string | null>;
   }>;
+
+    animais = [
+    {
+      nome: 'Luna',
+      especie: 'Gato',
+      idade: 2,
+      foto: 'https://cataas.com/cat?width=200&height=200&random=1',
+      descricao: 'Gata curiosa e dorminhoca.'
+    },
+    {
+      nome: 'Thor',
+      especie: 'Cachorro',
+      idade: 4,
+      foto: 'https://placedog.net/200/200',
+      descricao: 'Cachorro leal e protetor.'
+    },
+    {
+      nome: 'Nina',
+      especie: 'Gato',
+      idade: 3,
+      foto: 'https://cataas.com/cat?width=200&height=200&random=2',
+      descricao: 'Adora janelas e mimos.'
+    },
+    {
+      nome: 'Max',
+      especie: 'Cachorro',
+      idade: 5,
+      foto: 'https://placedog.net/201/200',
+      descricao: 'Ama correr e brincar com bola.'
+    },
+    {
+      nome: 'Mia',
+      especie: 'Gato',
+      idade: 1,
+      foto: 'https://cataas.com/cat?width=200&height=200&random=3',
+      descricao: 'Pequena, carinhosa e muito esperta.'
+    },
+    {
+      nome: 'Rex',
+      especie: 'Cachorro',
+      idade: 6,
+      foto: 'https://placedog.net/202/200',
+      descricao: 'Grandão, tranquilo e muito amigo.'
+    }
+  ];
+
+
 
   especies = ['Gato', 'Cachorro'];
   racas: string[] = [];

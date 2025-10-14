@@ -1,7 +1,7 @@
 <div class="main-page">
   <div class="header">
     <div class="left">
-      <img src="/assets/img/logo_preta.png" class="logo" />
+      <img src="/assets/img/logo-branca.png" class="logo" />
     </div>
     <div class="right">
       <div class="btns">
@@ -101,7 +101,12 @@
     </div>
 
     <div class="content">
-      <!-- Cards de pets aparecerão aqui -->
+        <div class="cards-container">
+            <app-card-animal
+            *ngFor="let animal of animais"
+            [animal]="animal"
+            ></app-card-animal>
+        </div>
     </div>
   </div>
 </div>

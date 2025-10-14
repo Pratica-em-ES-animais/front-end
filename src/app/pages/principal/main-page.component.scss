@@ -3,17 +3,20 @@
   flex-direction: column;
   background-color: var(--primary-offwhite);
   height: 100vw;
-  padding: 0 50px;
   gap: 20px;
 
   .header {
+    padding: 0 50px;
+    padding-top: 10px;
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
+    background-color: var(--third-purple);
+  
 
     .left {
       .logo {
-        width: clamp(80px, 20vw, 175px);
+        width: 150px;
       }
     }
 
@@ -27,13 +30,14 @@
     display: flex;
     gap: 2rem;
     height: 100%;
+    padding: 0 50px;
 
     .side-bar {
-      border: 1px solid var(--primary-purple);
       border-radius: 20px;
       width: 20%;
       height: fit-content;
       padding: 20px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       background: #fff;
@@ -74,10 +78,18 @@
 
     .content {
       flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
       padding: 20px;
+      display: flex;
+      justify-content: center; /* centraliza o container dentro da content */
+      align-items: flex-start;
+
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: flex-start; /* cards alinham à esquerda quando sobrar espaço */
+        max-width: 1200px; /* opcional, para limitar largura total */
+      }
     }
   }
 }
