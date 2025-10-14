@@ -14,8 +14,8 @@
                     <h2 class="h2">Adote animais que são compatíveis com a sua necessidade.</h2>
                 </div>
                 <div class="ver-animais-btn">
-                    <button class="btn-entrar">Entrar</button>
-                    <button class="btn-registrar">Ver animais</button>
+                    <button class="btn-entrar" (click)="login()">Entrar</button>
+                    <button class="btn-registrar" (click)="redirectTo('main-page')">Ver animais</button>
 
                 </div>
             </div>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="third-btn">
-            <button class="btn-ver-animais">Ver mais</button>
+            <button class="btn-ver-animais" (click)="redirectTo('main-page')">Ver mais</button>
         </div>
     </div>
 
