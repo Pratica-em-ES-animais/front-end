@@ -5,33 +5,33 @@
     flex-direction: column;
     justify-content: center;
     font-weight: 700;
+    height: 100%;
 
     .top{
         display: grid;
-        grid-template-columns: 33% 33% 33%;
+        width: 100%;
+        grid-template-columns: 1fr auto;
         .left{
-           
-        }
-        .center{
-            display: flex;
+           display: flex;
+           width: 100%;
             justify-content: center;
             .logo{
                 margin: 10px 0px;          
-                width: 250px;
+                width: 100%;
+                max-width: 180px;
                 height: auto;
             }
         }
         .right{
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
             .close-btn {
-                width: 100%;   /* tamanho fixo */
-                height: 100%;
-               
+                width: auto;   /* tamanho fixo */
+                height: auto;
             }
             .close-btn mat-icon{
-                font-size: 100px;
+                font-size: clamp(24px, 5vw, 48px); // responsivo
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -43,21 +43,29 @@
     }
     .bottom{
         .title{
-
+            display: flex;
+            font-size: clamp(15px, 20px, 32px);
+            justify-content: center;
+            color: var(--primary-purple);
         }
         .credentials{
             display: flex;
             flex-direction: column;
-            .input{
+            .hint{
+                color: var(--primary-purple);
             }
+           
             
         }
         .btn{
             width: 100%;
+            display: flex;
+            justify-content: center;
             .submit-btn{
-                width: 100%;
+                width:75%;
                 background-color: var(--primary-purple);
                 color: #FFF3E6;
+                max-width: 150px;
                 font-weight: 700;
             }
         }

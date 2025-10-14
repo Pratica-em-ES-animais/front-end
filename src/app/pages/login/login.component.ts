@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButton } from "@angular/material/button";
-import { MatDialog, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
+import { MatDialog, MatDialogContent, MatDialogActions, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 
@@ -18,7 +18,7 @@ import { MatIconButton } from '@angular/material/button';
 export class LoginComponent {
 
   protected loginForm : FormGroup;
-  constructor(private fb : FormBuilder){
+  constructor(private fb : FormBuilder, private dialogRef: MatDialogRef<LoginComponent>){
     this.loginForm = fb.group({
       email: [null,[Validators.email, Validators.required]],
       senha: [null, [Validators.required]]
@@ -27,5 +27,9 @@ export class LoginComponent {
   // para apresentar vou redirecionar de uma vez, sem mandar pro back-end.
   submit() {
     console.log('Submiting');
+  }
+
+  close(){
+    this.dialogRef.close();
   }
 }

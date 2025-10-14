@@ -2,12 +2,10 @@
     <mat-dialog-actions>
         <div class="top">
             <div class="left">
-            </div>
-            <div class="center">
                 <img src="/assets/img/logo_preta.png" class="logo">
             </div>
             <div class="right">
-                <button mat-icon-button class="close-btn">
+                <button mat-icon-button class="close-btn" (click)="close()">
                     <mat-icon class="icon">close</mat-icon>
                 </button>
             </div>
@@ -20,11 +18,11 @@
             </div>
                 <form [formGroup]="loginForm">
                     <div class="credentials">
-                        <span>Email*</span>
+                        <span class="hint">Email*</span>
                         <mat-form-field appearance="outline">
                             <input matInput placeholder="Seu email" class="input" formControlName="email">
                         </mat-form-field>
-                        <span>Senha*</span>
+                        <span class="hint">Senha*</span>
                         <mat-form-field appearance="outline">
                                 <input matInput placeholder="Sua senha" class="input" formControlName="senha">
                         </mat-form-field>
