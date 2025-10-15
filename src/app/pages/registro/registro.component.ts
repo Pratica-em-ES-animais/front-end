@@ -7,8 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { User } from '../../models/user-model';
-import { RegistroUsuarioService } from '../../services/registro-usuario.service';
+import { User } from '../../core/models/user-model';
+import { RegistroUsuarioService } from '../../core/services/registro-usuario.service';
 import { CommonModule } from '@angular/common';
 
 

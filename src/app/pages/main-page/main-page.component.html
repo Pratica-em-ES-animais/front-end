@@ -1,0 +1,122 @@
+<!-- Barra de debug para troca rápida de roles -->
+<div class="debug-bar">
+  <button mat-stroked-button color="primary" (click)="setUserType('NOLOG')">No Log</button>
+  <button mat-stroked-button color="accent" (click)="setUserType('ADOTANTE')">Adotante</button>
+  <button mat-stroked-button color="warn" (click)="setUserType('TUTOR')">Tutor</button>
+  <span class="status"> Usuário atual: {{ role }}</span>
+</div>
+
+<app-header [role]="role"></app-header>
+
+<div class="main-content">
+  <aside class="sidebar">
+    <h3>Filtros</h3>
+
+    <form [formGroup]="form">
+      <!-- Nome -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <!-- Espécie -->
+      <mat-form-field appearance="outline">
+        <mat-label>Espécie</mat-label>
+        <mat-select formControlName="species">
+          <mat-option *ngFor="let e of especies" [value]="e">{{ e }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Raça -->
+      <mat-form-field appearance="outline">
+        <mat-label>Raça</mat-label>
+        <mat-select formControlName="breed">
+          <mat-option
+            *ngFor="let r of getRacas(form.value.species)"
+            [value]="r"
+          >
+            {{ r }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <!-- Sexo -->
+      <mat-form-field appearance="outline">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sex">
+          <mat-option *ngFor="let s of sexos" [value]="s">{{ s }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Idade -->
+      <mat-slider min="0" max="20" step="1">
+        <input
+          matSliderThumb
+          [value]="form.value.age"
+          (valueChange)="form.controls['age'].setValue($event)"
+        />
+      </mat-slider>
+      <div>Idade: {{ form.value.age }} anos</div>
+
+      <!-- Tamanho -->
+      <mat-form-field appearance="outline">
+        <mat-label>Tamanho</mat-label>
+        <mat-select formControlName="size">
+          <mat-option *ngFor="let t of tamanhos" [value]="t">{{ t }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Energia -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nível de energia</mat-label>
+        <mat-select formControlName="energy">
+          <mat-option *ngFor="let e of energias" [value]="e">{{ e }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Temperamento -->
+      <mat-form-field appearance="outline">
+        <mat-label>Temperamento</mat-label>
+        <mat-select formControlName="temperament">
+          <mat-option *ngFor="let t of temperamentos" [value]="t">{{ t }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Sociabilidade -->
+      <mat-form-field appearance="outline">
+        <mat-label>Sociabilidade</mat-label>
+        <mat-select formControlName="sociability">
+          <mat-option *ngFor="let s of sociabilidades" [value]="s">{{ s }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Castrado / Vacinado -->
+      <mat-checkbox formControlName="neutered">Castrado</mat-checkbox>
+      <mat-checkbox formControlName="vaccinated">Vacinado</mat-checkbox>
+
+      <!-- Status -->
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let st of status" [value]="st">{{ st }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Botões -->
+      <div class="btn-group">
+        <button mat-flat-button color="primary" (click)="filtrar()">Aplicar</button>
+        <button mat-stroked-button color="warn" (click)="limpar()">Limpar</button>
+      </div>
+    </form>
+  </aside>
+
+  <!-- Cards de animais -->
+  <section class="animals-container">
+    <app-animal-card
+      *ngFor="let a of animaisFiltrados"
+      [animal]="a"
+      [role]="role"
+    ></app-animal-card>
+  </section>
+</div>
