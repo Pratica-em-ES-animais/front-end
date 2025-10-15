@@ -61,80 +61,121 @@
         .formContainer{
             display: flex;
             width: 100%;
+            height: 50%;
             justify-content: center;      
-            justify-self: center;
             color: var(--primary-purple);
+            font-weight: 700;
             @media (max-width: 992px) {
                 width: 80%;
             }
             .formCard{
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
                 padding: 30px;
-                font-weight: 700;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
                 border-radius: 20px;
+                width: 75%;
+                height: auto;
                 box-shadow: 4px 4px 30px 0 rgba(0,0,0,0.2);
-                .formContent{
+                .top{
                     display: flex;
+                    justify-content: center;
                     width: 100%;
+                    height: auto;
+                    #subtitle{
+                        padding-left: 15px;
+                    }
+                }
+                .first{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     flex-direction: column;
-                    font-weight: 700;
-                    .text-input{
+                    width: 100%;
+                    .formTitle{
                         width: 100%;
-                        .input{
-                            font-size: 20px;
-                            .mat-mdc-form-field-icon-suffix {
-                                display: none !important;
-                            }
+                    }
+                    .btn-fst{
+                        background-color: var(--primary-purple);
+                        color: var(--primary-offwhite);
+                        width: 100%;
+                    }
+                    .line{
+                        margin: 10px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        width: 100%;
+                        color: black;
+                        &::before,
+                        &::after {
+                            content: "";
+                            flex: 1;
+                            border-bottom: 1px solid black;
+                        }
+                        span {
+                            padding: 0 10px; /* espaço entre o texto e as linhas */
                         }
                     }
+                }
+                .snd{
                     .firstRow{
                         display: flex;
                         width: 100%;
                         flex-direction: row;
+                        justify-content: flex-start;
                         gap: 15px;
                         .nome{
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            .text-input{
+                                width: 100%;
+                            }
+                        }
+                    }
+                    .sndRow{
+                        display: flex;
+                        width: 100%;
+                        justify-content: flex-start;
+                        flex-direction: row;
+                        gap: 15px;
+                        .cpf{
+                            .mat-form-field {
+                                width: 100%;
+                                }
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            .text-input{
+                                width: 100%;
+                            }
+                        }
+                        .dob{
+                            display: flex;
+                            flex-direction: column;
                             width: 100%;
                         }
                     }
-                    .secondRow{
-                        width: 100%;
-                    }
-                    .forthRow{
-                        .hide-icon{
-                            color: var(--primary-purple);
-                        }
-                    }
-                    .fifthRow{
-                        width: 100%;
+
+                    .bts{
                         display: flex;
-                        flex-direction: row;
-                        gap : 10px;
-                        .ddd{
-                            display: flex;
-                            flex-direction: column;
-                            width: 30%;
-                        }
-                        .telefone{
-                            display: flex;
-                            flex-direction: column;
-                            width: 70%;
+                        gap: 15px;
+                        justify-content: center;
+                        .btn{
+                            width: 20%;
+                            padding: 3px;
+                            background-color: var(--primary-purple);
+                            color: var(--primary-offwhite);
                         }
                     }
                 }
-                .formTitle{
-                    width: 100%;
-                }
-                .buttons{
-                    width: 100%;
+                .trd{
                     display: flex;
-                    justify-content: center;
-                    .send-btn {
-                        color: #FFF3E6;
-                        background-color: var(--primary-purple);
-                    }
+                    flex-direction: column;
+                    width: 100%;
+                    
                 }
             }
         }

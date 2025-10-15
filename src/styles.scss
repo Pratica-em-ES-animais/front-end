@@ -25,4 +25,8 @@ body {
         outlined-input-text-placeholder-color: #CC6EA5,
         outlined-input-text-color: black,
   ));
+  @include mat.stepper-overrides((
+        container-color : var(--primary-offwhite)
+  ));
+
 }

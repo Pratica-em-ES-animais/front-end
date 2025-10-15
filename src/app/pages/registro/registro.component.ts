@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,25 +10,40 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user-model';
 import { RegistroUsuarioService } from '../../services/registro-usuario.service';
 import { CommonModule } from '@angular/common';
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { CdkStepperModule, StepperSelectionEvent } from "@angular/cdk/stepper";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-registro',
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, NgxMaskDirective, MatIconModule, CommonModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule,
+            NgxMaskDirective, MatIconModule, CommonModule, MatStepperModule, MatRadioModule,
+            FormsModule, CdkStepperModule, MatDatepickerModule],
   templateUrl: './registro.component.html',
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), provideNativeDateAdapter()],
   styleUrl: './registro.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class RegistroComponent {
   protected usuarioForm : FormGroup;
+  protected roleForm : FormGroup;
+  protected tituloStep = "Escolha seu perfil";
+  protected subtituloStep = "Selecione sua função";
+
+
   protected pwd = signal(true);
   protected pwdConfirmation = signal(true);
   private readonly router: Router;
-  
+  protected role : string | null = null;
+
   constructor(private fb: FormBuilder, private readonly service : RegistroUsuarioService){
     this.router = inject(Router);
+    this.roleForm = this.fb.group({
+      role : [null, [Validators.required]]
+    });
     this.usuarioForm = this.fb.group({
       primeiroNome : [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       sobrenome: [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
@@ -73,6 +88,27 @@ export class RegistroComponent {
     this.service.createUser(user);
   }
 
+  form(role : string){
+    console.log(role);
+    this.role = role;
+    this.roleForm.patchValue({ role: role });
+  }
+
+  atualizarTitulos(event : StepperSelectionEvent){
+    if(this.role === 'user'){
+      switch(event.selectedIndex){
+        case 0:
+          this.tituloStep = "Escolha seu perfil";
+          this.subtituloStep = "Selecione sua função";
+          break;
+        case 1:
+          this.tituloStep = "Preencha seus dados pessoais";
+          this.subtituloStep = '';
+          break;
+        
+      }
+    }
+  }
 }
 
 
