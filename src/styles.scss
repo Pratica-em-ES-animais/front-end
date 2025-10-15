@@ -90,6 +90,9 @@ body {
   with-tick-marks-active-container-color: var(--primary-purple),
   with-tick-marks-inactive-container-color: #d6b3d9
   ));
+  @include mat.stepper-overrides((
+        container-color : var(--primary-offwhite)
+  ));
 
 
 
