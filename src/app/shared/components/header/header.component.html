@@ -1,0 +1,19 @@
+<header class="header">
+  <div class="left">
+    <img src="/assets/img/logo-branca.png" class="logo" />
+  </div>
+
+  <div class="right" *ngIf="role === 'NOLOG'">
+    <button class="btn" (click)="abrirPerfil()">Entrar</button>
+    <button class="btn">Registra-se</button>
+  </div>
+
+  <div class="right" *ngIf="role === 'ADOTANTE'">
+    <button class="btn" (click)="abrirPerfil()">Meu Perfil</button>
+  </div>
+
+  <div class="right" *ngIf="role === 'TUTOR'">
+    <button class="btn" (click)="abrirPerfil()">Meu Perfil</button>
+    <button class="btn" (click)="cadastrarAnimal()">+ Cadastrar Animal</button>
+  </div>
+</header>

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ data.animal.name }}</h2>
+<mat-dialog-content>
+  <img [src]="data.animal.photo" alt="foto" class="modal-photo" />
+  <div class="info-section">
+    <p><strong>Espécie:</strong> {{ data.animal.species }}</p>
+    <p><strong>Raça:</strong> {{ data.animal.breed }}</p>
+    <p><strong>Sexo:</strong> {{ data.animal.sex }}</p>
+    <p><strong>Idade:</strong> {{ data.animal.age }} anos</p>
+    <p><strong>Tamanho:</strong> {{ data.animal.size }}</p>
+    <p><strong>Temperamento:</strong> {{ data.animal.temperament }}</p>
+    <p><strong>Energia:</strong> {{ data.animal.energy }}</p>
+    <p><strong>Sociabilidade:</strong> {{ data.animal.sociability }}</p>
+    <p><strong>Saúde:</strong> {{ data.animal.health_details }}</p>
+    <p><strong>Descrição:</strong> {{ data.animal.description }}</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end" *ngIf="data.role === 'ADOTANTE'">
+  <button mat-flat-button color="primary">Adotar</button>
+</mat-dialog-actions>
