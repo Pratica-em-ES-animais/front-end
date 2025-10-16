@@ -28,7 +28,10 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 })
 
 export class RegistroComponent {
-  protected usuarioForm : FormGroup;
+  protected userDataForm : FormGroup;
+  protected currentForm : FormGroup;
+
+
   protected roleForm : FormGroup;
   protected tituloStep = "Escolha seu perfil";
   protected subtituloStep = "Selecione sua função";
@@ -38,22 +41,26 @@ export class RegistroComponent {
   protected pwdConfirmation = signal(true);
   private readonly router: Router;
   protected role : string | null = null;
+  protected tutorDataForm: FormGroup;
 
   constructor(private fb: FormBuilder, private readonly service : RegistroUsuarioService){
     this.router = inject(Router);
     this.roleForm = this.fb.group({
       role : [null, [Validators.required]]
     });
-    this.usuarioForm = this.fb.group({
+    this.userDataForm = this.fb.group({
       primeiroNome : [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       sobrenome: [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-      cpf: [null, [Validators.required, Validators.pattern('[0-9]{11}')]],
+      cpf: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
       confirmarSenha: [null, Validators.required],
-      ddd: [null, [Validators.required, Validators.pattern('[0-9]{2}')]],
-      telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]]
+      ddd: [null, [Validators.required]],
+      telefone: [null, [Validators.required]]
     });
+    this.tutorDataForm = this.fb.group({});
+    this.currentForm = this.fb.group({});
+
   }
  
   hidePwd(event:MouseEvent){
@@ -73,25 +80,30 @@ export class RegistroComponent {
   }
 
   submit(){
-    if(this.usuarioForm.invalid){
+    if(this.currentForm.invalid){
+      console.log(this.currentForm.controls);
       return;
     }
+    console.log(this.currentForm.value);
+
     const user : User = {
-      primeiroNome :  this.usuarioForm.value.primeiroNome,
-      sobrenome : this.usuarioForm.value.sobrenome,
-      cpf : this.usuarioForm.value.cpf,
-      email : this.usuarioForm.value.email,
-      senha : this.usuarioForm.value.senha,
-      ddd : this.usuarioForm.value.ddd,
-      telefone : this.usuarioForm.value.telefone
+      primeiroNome :  this.currentForm.value.primeiroNome,
+      sobrenome : this.currentForm.value.sobrenome,
+      cpf : this.currentForm.value.cpf,
+      email : this.currentForm.value.email,
+      senha : this.currentForm.value.senha,
+      ddd : this.currentForm.value.ddd,
+      telefone : this.currentForm.value.telefone
     }
     this.service.createUser(user);
+    this.router.navigate(['/']);
   }
 
   form(role : string){
-    console.log(role);
     this.role = role;
     this.roleForm.patchValue({ role: role });
+    this.currentForm = role === 'user' ? this.userDataForm : this.tutorDataForm;
+    
   }
 
   atualizarTitulos(event : StepperSelectionEvent){

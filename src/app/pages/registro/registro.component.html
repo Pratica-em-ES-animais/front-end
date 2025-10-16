@@ -23,9 +23,11 @@
                     </div>
                 </div>
             </div>
+            <div class="bottom">
                 <mat-stepper linear="true" headerPosition="bottom" #stepper (selectionChange)="atualizarTitulos($event)"> 
-                    <mat-step [stepControl]="roleForm">
+                    <mat-step [stepControl]="roleForm" label="Função">
                         <form [formGroup]="roleForm">
+                            <ng-template matStepLabel>Função</ng-template>
                             <div class="first">
                                 
                                 <button mat-flat-button (click)="form('user'); stepper.next()" class="btn-fst">Quero adotar um animal!</button>
@@ -36,11 +38,12 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step>
+                    <mat-step label="Dados pessoais">
                         <div class="snd">
                             <ng-container [ngSwitch]="role">
                                 <ng-container *ngSwitchCase="'user'">
-                                    <form [formGroup]="usuarioForm">
+                                    <form [formGroup]="currentForm">
+                    
                                         <div class="firstRow">
                                             <div class="nome">
                                                 <span>Nome*</span>
@@ -73,10 +76,10 @@
                             </div>
                         </div>
                     </mat-step>
-                    <mat-step>
+                    <mat-step label="Dados de login">
                         <ng-container [ngSwitch]="role">
                             <ng-container *ngSwitchCase="'user'">
-                                <form [formGroup]="usuarioForm">
+                                <form [formGroup]="currentForm">
                                     <div class="trd">
                                         <span>Email*</span>
                                         <mat-form-field appearance="outline" class="text-input">
@@ -96,12 +99,36 @@
                                             <mat-icon class="hide-icon">{{pwdConfirmation() ? 'visibility_off' : 'visibility'}}</mat-icon>
                                         </button>
                                         </mat-form-field>
+                                        <div class="phone">
+                                            <div class="ddd">
+                                                <span>DDD*</span>
+                                                <mat-form-field appearance="outline" class="text-input">
+                                                    <input matInput formControlName="ddd" placeholder="(00)" mask="00"class="input">        
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="number">
+                                                <span>Telefone*</span>
+                                                <mat-form-field appearance="outline" class="text-input">
+                                                    <input matInput formControlName="telefone" placeholder="0000-0000" mask="0000-0000" class="input">        
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </ng-container>
                         </ng-container>
-                    </mat-step>
-                </mat-stepper>
+                        <div class="bts">
+                                <button mat-flat-button matStepperPrevious class="btn">Voltar</button>
+                                <button mat-flat-button matStepperNext class="btn">Avançar</button>
+                        </div>
+                        </mat-step>
+                        <mat-step label="Finalizar">
+                            <div class="bts">
+                            <button mat-flat-button class="btn-submit" (click)="submit()">Finalizar!</button>
+                            </div>
+                        </mat-step>
+                    </mat-stepper>
+                </div>
                 <!-- <form [formGroup]="usuarioForm">
                
                             <div class="thirdRow">
@@ -127,20 +154,7 @@
                                 </button>
                                 </mat-form-field>
                             </div>
-                            <div class="fifthRow">
-                                <div class="ddd">
-                                    <span>DDD*</span>
-                                    <mat-form-field appearance="outline" class="text-input">
-                                        <input matInput formControlName="ddd" placeholder="(51)" mask="00"class="input">        
-                                    </mat-form-field>
-                                </div>
-                                <div class="telefone">
-                                    <span>Telefone*</span>
-                                    <mat-form-field appearance="outline" class="text-input">
-                                        <input matInput formControlName="telefone" placeholder="(9)0000-0000" mask="900000000" class="input">        
-                                    </mat-form-field>
-                                </div>
-                            </div>
+                            
                         </div>
                     </form>
                 <div class="buttons">
