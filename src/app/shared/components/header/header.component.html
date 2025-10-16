@@ -1,11 +1,18 @@
 <header class="header">
   <div class="left">
-    <img src="/assets/img/logo-branca.png" class="logo" />
+    <a routerLink="/">
+      <img
+        src="/assets/img/logo-branca.png"
+        class="logo"
+        (click)="irParaHome()"
+        style="cursor: pointer"
+      />
+    </a>
   </div>
 
   <div class="right" *ngIf="role === 'NOLOG'">
-    <button class="btn" (click)="abrirPerfil()">Entrar</button>
-    <button class="btn">Registra-se</button>
+    <button class="btn" (click)="login()">Entrar</button>
+    <button class="btn" (click)="logon()">Registra-se</button>
   </div>
 
   <div class="right" *ngIf="role === 'ADOTANTE'">

@@ -21,13 +21,12 @@ export class AnimalCardComponent {
 
   abrirDetalhes() {
     this.dialog.open(AnimalModalComponent, {
-      width: '80vw',
-      maxWidth: '400px',
+      width: '90vw',          // ocupa 90% da largura da tela
+      maxWidth: '900px',     // limite visual em desktops grandes
       height: 'auto',
-      maxHeight: '90vh',
+      maxHeight: '90vh',      // impede de passar da altura visível
       data: { animal: this.animal, role: this.role },
-      panelClass: 'animal-dialog'
+      panelClass: 'animal-dialog' // classe para estilização global opcional
     });
   }
-
 }

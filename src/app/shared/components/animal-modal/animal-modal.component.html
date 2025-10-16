@@ -1,19 +1,49 @@
-<h2 mat-dialog-title>{{ data.animal.name }}</h2>
-<mat-dialog-content>
-  <img [src]="data.animal.photo" alt="foto" class="modal-photo" />
-  <div class="info-section">
-    <p><strong>Espécie:</strong> {{ data.animal.species }}</p>
-    <p><strong>Raça:</strong> {{ data.animal.breed }}</p>
-    <p><strong>Sexo:</strong> {{ data.animal.sex }}</p>
-    <p><strong>Idade:</strong> {{ data.animal.age }} anos</p>
-    <p><strong>Tamanho:</strong> {{ data.animal.size }}</p>
-    <p><strong>Temperamento:</strong> {{ data.animal.temperament }}</p>
-    <p><strong>Energia:</strong> {{ data.animal.energy }}</p>
-    <p><strong>Sociabilidade:</strong> {{ data.animal.sociability }}</p>
-    <p><strong>Saúde:</strong> {{ data.animal.health_details }}</p>
-    <p><strong>Descrição:</strong> {{ data.animal.description }}</p>
+<div class="animal-modal">
+  <div class="modal-content">
+
+    <div class="image-section">
+      <img [src]="data.animal.photo" [alt]="data.animal.name" />
+      <span class="status-tag" [class]="data.animal.status.toLowerCase()">
+        {{ data.animal.status }}
+      </span>
+    </div>
+
+    <div class="details-section">
+      <h2>{{ data.animal.name }}</h2>
+
+      <div class="info-grid">
+        <div><strong>Espécie:</strong> {{ data.animal.species }}</div>
+        <div><strong>Raça:</strong> {{ data.animal.breed }}</div>
+        <div><strong>Sexo:</strong> {{ data.animal.sex }}</div>
+        <div><strong>Idade:</strong> {{ data.animal.age }} anos</div>
+        <div><strong>Tamanho:</strong> {{ data.animal.size }}</div>
+        <div><strong>Temperamento:</strong> {{ data.animal.temperament }}</div>
+        <div><strong>Energia:</strong> {{ data.animal.energy }}</div>
+        <div><strong>Sociabilidade:</strong> {{ data.animal.sociability }}</div>
+        <div><strong>Saúde:</strong> {{ data.animal.health_details }}</div>
+      </div>
+
+      <div class="description">
+        <strong>Descrição:</strong>
+        <p>{{ data.animal.description }}</p>
+      </div>
+    </div>
   </div>
-</mat-dialog-content>
-<mat-dialog-actions align="end" *ngIf="data.role === 'ADOTANTE'">
-  <button mat-flat-button color="primary">Adotar</button>
-</mat-dialog-actions>
+
+
+  <div class="adopt-section" *ngIf="data.role === 'ADOTANTE'">
+    <button mat-flat-button color="primary" class="adopt-btn">
+      Adotar {{ data.animal.name }}
+    </button>
+  </div>
+
+  <div class="adopt-section nolog" *ngIf="data.role === 'NOLOG'">
+    <button
+      mat-flat-button
+      class="adopt-btn disabled"
+      (click)="login()"
+    >
+      Faça login para adotar
+    </button>
+  </div>
+</div>

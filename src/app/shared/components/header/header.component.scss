@@ -5,6 +5,19 @@
   background-color: var(--third-purple);
   padding: 0 50px;
 
+  .left a {
+    display: inline-block;
+  }
+
+  .left a img {
+    cursor: pointer;
+  }
+
+  .left a {
+    text-decoration: none;
+  }
+
+
   .logo {
     width: 150px;
     padding-top: 10px;
