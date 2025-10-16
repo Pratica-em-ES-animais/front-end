@@ -3,14 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButton } from "@angular/material/button";
-import { MatDialog, MatDialogContent, MatDialogActions, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [MatFormField, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButton,
-    MatDialogContent, MatDialogActions, MatIconModule, MatIconButton],
+            MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -18,7 +16,7 @@ import { MatIconButton } from '@angular/material/button';
 export class LoginComponent {
 
   protected loginForm : FormGroup;
-  constructor(private fb : FormBuilder, private dialogRef: MatDialogRef<LoginComponent>){
+  constructor(private fb : FormBuilder, private router : Router){
     this.loginForm = fb.group({
       email: [null,[Validators.email, Validators.required]],
       senha: [null, [Validators.required]]
@@ -29,7 +27,7 @@ export class LoginComponent {
     console.log('Submiting');
   }
 
-  close(){
-    this.dialogRef.close();
+  back(){
+    this.router.navigate(['/']);
   }
 }
