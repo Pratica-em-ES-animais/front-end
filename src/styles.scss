@@ -19,11 +19,78 @@ body {
   --primary-yellow: #FCB82E;
   --primary-offwhite: #fff5ea;
   --secondary-offwhite: #FFEBD5;
+  
   @include mat.form-field-overrides((
-        outlined-outline-color: var(--primary-purple),
-        outlined-outline-width: 2px,
-        outlined-focus-outline-color: var(--primary-purple),
-        outlined-input-text-placeholder-color: #CC6EA5,
-        outlined-input-text-color: black,
+    outlined-outline-color: var(--primary-purple),
+    outlined-outline-width: 2px,
+    outlined-focus-outline-color: var(--primary-purple),
+
+    outlined-input-text-color: black,               // texto digitado
+    outlined-input-text-placeholder-color: #CC6EA5, // placeholder
+    outlined-label-text-color: #CC6EA5,             // label normal
+    outlined-focus-label-text-color: var(--primary-purple), // label ao focar
   ));
+
+  @include mat.select-overrides((
+  panel-background-color: #1c1c1c,
+  placeholder-text-color: #CC6EA5,
+  enabled-trigger-text-color: var(--primary-purple),
+  enabled-arrow-color: var(--primary-purple),
+  focused-arrow-color: var(--primary-purple),
+  ));   
+
+ @include mat.checkbox-overrides((
+  // Ícone (caixinha)
+  unselected-icon-color: var(--primary-purple),
+  selected-icon-color: var(--primary-purple),
+  selected-checkmark-color: white,
+
+  // Hover/focus: define cor e opacidade do "state layer" (aquela camada cinza)
+  unselected-hover-state-layer-color: var(--primary-purple),
+  unselected-hover-state-layer-opacity: 0.08,
+  selected-hover-state-layer-color: var(--primary-purple),
+  selected-hover-state-layer-opacity: 0.08,
+
+  unselected-focus-state-layer-color: var(--primary-purple),
+  unselected-focus-state-layer-opacity: 0.1,
+  selected-focus-state-layer-color: var(--primary-purple),
+  selected-focus-state-layer-opacity: 0.1,
+
+  // Press (quando clica)
+  unselected-pressed-state-layer-color: var(--primary-purple),
+  unselected-pressed-state-layer-opacity: 0.12,
+  selected-pressed-state-layer-color: var(--primary-purple),
+  selected-pressed-state-layer-opacity: 0.12,
+
+  // Texto do label
+  label-text-color: var(--primary-purple),
+  disabled-label-color: #aaa
+  ));
+
+  @include mat.slider-overrides((
+  // 🎯 Bolinha (thumb)
+  handle-color: var(--primary-purple),
+  hover-handle-color: var(--primary-purple),
+  focus-handle-color: var(--primary-purple),
+  handle-elevation: 0, // remove a sombra da bolinha
+
+  // 🎚️ Faixas (trilhas)
+  active-track-color: var(--primary-purple),   // faixa ativa (à esquerda do thumb)
+  inactive-track-color: #d6b3d9,               // faixa inativa (à direita)
+
+  // ✨ Indicador de valor (tooltip acima do thumb, se tiver)
+  label-container-color: var(--primary-purple),
+  label-label-text-color: white,
+
+  // 🚫 Remove camadas de hover/focus cinzas
+  hover-state-layer-color: transparent,
+  focus-state-layer-color: transparent,
+
+  // 🪄 Caso use ticks (marquinhas)
+  with-tick-marks-active-container-color: var(--primary-purple),
+  with-tick-marks-inactive-container-color: #d6b3d9
+  ));
+
+
+
 }
