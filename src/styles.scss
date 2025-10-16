@@ -26,7 +26,9 @@ body {
         outlined-input-text-color: black,
   ));
   @include mat.stepper-overrides((
-        container-color : var(--primary-offwhite)
+        container-color : var(--primary-offwhite),
+        header-label-text-color : var(--secondary-purple),
+        header-selected-state-label-text-color : var(--primary-purple)
   ));
 
 }
