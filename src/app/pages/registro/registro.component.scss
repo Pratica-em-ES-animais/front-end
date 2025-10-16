@@ -1,7 +1,19 @@
-
 .registro-page{
-    display: grid;
-    grid-template-columns: 50% 50%;
+    @media (max-width: 992px) {
+    flex-direction: column;
+        
+        .left, .right {
+            width: 100%;
+            height: 50%;
+        }
+
+        .right {
+        background-size: cover;
+        background-position: center;
+        }
+    }
+    display: flex;
+    flex-direction: row;
     height: 100%;
     width: 100%;
     .right{
@@ -18,7 +30,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        justify-content: start;
+        justify-content: center;
         .head{
             display: grid;
             width: 100%;
@@ -61,81 +73,166 @@
         .formContainer{
             display: flex;
             width: 100%;
+            height: auto;
+            align-items: center;
             justify-content: center;      
-            justify-self: center;
             color: var(--primary-purple);
+            font-weight: 700;
             @media (max-width: 992px) {
                 width: 80%;
             }
             .formCard{
                 display: flex;
-                flex-direction: column;
                 align-items: center;
-                justify-content: flex-start;
-                padding: 30px;
-                font-weight: 700;
+                flex-direction: column;
                 border-radius: 20px;
+                width: 75%;
+                height: auto;
                 box-shadow: 4px 4px 30px 0 rgba(0,0,0,0.2);
-                .formContent{
+                @media(max-width:992px){
+                     .top, .bottom{
+                        width: 75%;
+                    }
+                }
+                .top{
                     display: flex;
+                    justify-content: center;
                     width: 100%;
-                    flex-direction: column;
-                    font-weight: 700;
-                    .text-input{
+                    height: auto;
+                    #subtitle{
+                        padding-left: 15px;
+                    }
+                }
+                .bottom{
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    .first{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
                         width: 100%;
-                        .input{
-                            font-size: 20px;
-                            .mat-mdc-form-field-icon-suffix {
-                                display: none !important;
+                        @media(max-width:992px){
+                            width: 75%;
+                        }
+                        
+                        .formTitle{
+                            width: 100%;
+                        }
+                        .btn-fst{
+                             @media(max-width:992px){
+                                width: 30%;
+                                height: auto;
+                            }
+                            background-color: var(--primary-purple);
+                            color: var(--primary-offwhite);
+                            width: 100%;
+                            max-width: 350px ;
+                        }
+                        .line{
+                            @media(max-width:992px){
+                                width: 75%;
+                            }
+                            margin: 10px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            width: 100%;
+                            color: black;
+                            &::before,
+                            &::after {
+                                content: "";
+                                flex: 1;
+                                border-bottom: 1px solid black;
+                            }
+                            span {
+                                padding: 0 10px; /* espaço entre o texto e as linhas */
                             }
                         }
                     }
-                    .firstRow{
-                        display: flex;
-                        width: 100%;
-                        flex-direction: row;
-                        gap: 15px;
-                        .nome{
+                    .snd{
+                        .firstRow{
+                            display: flex;
                             width: 100%;
+                            flex-direction: row;
+                            justify-content: flex-start;
+                            gap: 15px;
+                            .nome{
+                                display: flex;
+                                flex-direction: column;
+                                width: 100%;
+                                .text-input{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                        .sndRow{
+                            display: flex;
+                            width: 100%;
+                            justify-content: flex-start;
+                            flex-direction: row;
+                            gap: 15px;
+                            .cpf{
+                                .mat-form-field {
+                                    width: 100%;
+                                    }
+                                display: flex;
+                                flex-direction: column;
+                                width: 100%;
+                                .text-input{
+                                    width: 100%;
+                                }
+                            }
+                            .dob{
+                                display: flex;
+                                flex-direction: column;
+                                width: 100%;
+                            }
                         }
                     }
-                    .secondRow{
-                        width: 100%;
-                    }
-                    .forthRow{
-                        .hide-icon{
-                            color: var(--primary-purple);
-                        }
-                    }
-                    .fifthRow{
-                        width: 100%;
-                        display: flex;
-                        flex-direction: row;
-                        gap : 10px;
-                        .ddd{
+                        .trd{
                             display: flex;
                             flex-direction: column;
-                            width: 30%;
+                            width: 100%;
+                            .phone{
+                                gap: 15px;
+                                display: flex;
+                                flex-direction: row;
+                                .ddd{
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 100%;
+                                }
+                                .number{
+                                    width: 100%;
+
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                            }
+                            
                         }
-                        .telefone{
+                        .bts{
                             display: flex;
-                            flex-direction: column;
-                            width: 70%;
+                            gap: 15px;
+                            justify-content: center;
+                            width: 100%;
+                            .btn{
+                                width: 20%;
+                                padding: 3px;
+                                background-color: var(--primary-purple);
+                                color: var(--primary-offwhite);
+                            }
+                            .btn-submit{
+                                width: 90%;
+                                padding: 3px;
+                                background-color: var(--primary-purple);
+                                color: var(--primary-offwhite);
+                            }
                         }
-                    }
                 }
-                .formTitle{
-                    width: 100%;
-                }
-                .buttons{
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    .send-btn {
-                        color: #FFF3E6;
-                        background-color: var(--primary-purple);
-                    }
-                }
+                
             }
         }
     }
