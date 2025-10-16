@@ -1,39 +1,40 @@
+
 <div class="container">
-    <mat-dialog-actions>
-        <div class="top">
-            <div class="left">
-                <img src="/assets/img/logo_preta.png" class="logo">
+   
+    <div class="bottom">
+        <div class="card">
+            <div class="top">
+                <div class="head">
+                    <img src="/assets/img/logo_preta.png" class="logo">
+                </div>
+                 <div class="title">
+                    <h1>Acesse sua conta</h1>
+                </div>
             </div>
-            <div class="right">
-                <button mat-icon-button class="close-btn" (click)="close()">
-                    <mat-icon class="icon">close</mat-icon>
-                </button>
+            <div class="bottom">
+               
+                <div class="credentials">
+                    <form [formGroup]="loginForm">
+                        <div class="inputs">
+                            <span class="hint">Email*</span>
+                            <mat-form-field appearance="outline" class="input">
+                                <input matInput placeholder="Seu email"  formControlName="email">
+                            </mat-form-field>
+                            <span class="hint">Senha*</span>
+                            <mat-form-field appearance="outline"  class="input">
+                                    <input matInput placeholder="Sua senha" formControlName="senha">
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+                <div class="btn">
+                    <button mat-flat-button class="submit-btn" (click)="back()">Voltar</button>
+                    <button mat-flat-button type="submit" class="submit-btn" (click)="submit()">Entrar</button>
+                </div>
+                <div class="registre">
+                    <span>Não possui conta? <a href="http://localhost:4200/registro">Registre-se</a></span>
+                </div>
             </div>
         </div>
-    </mat-dialog-actions>
-    <mat-dialog-content>
-        <div class="bottom">
-            <div class="title">
-                <h1>Acesse sua conta</h1>
-            </div>
-                <form [formGroup]="loginForm">
-                    <div class="credentials">
-                        <span class="hint">Email*</span>
-                        <mat-form-field appearance="outline">
-                            <input matInput placeholder="Seu email" class="input" formControlName="email">
-                        </mat-form-field>
-                        <span class="hint">Senha*</span>
-                        <mat-form-field appearance="outline">
-                                <input matInput placeholder="Sua senha" class="input" formControlName="senha">
-                        </mat-form-field>
-                    </div>
-                </form>
-            <div class="btn">
-                <button mat-flat-button type="submit" class="submit-btn" (click)="submit()">Entrar</button>
-            </div>
-            <div class="registre">
-                <span>Não possui conta? <a href="http://localhost:4200/registro">Registre-se</a></span>
-            </div>
-        </div>
-    </mat-dialog-content>
+    </div>
 </div>

@@ -9,5 +9,5 @@ export const routes: Routes = [
     { path: 'registro', component: RegistroComponent},
     { path: 'main-page', component: MainPageComponent},
     { path: 'login', component: LoginComponent},
-    { path: '**', redirectTo: '' } 
+    { path: '**', redirectTo: '/' } 
 ];
