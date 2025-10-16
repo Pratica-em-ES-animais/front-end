@@ -1,27 +1,27 @@
 .container{
-    color: var(--primary-purple);
-    background-color: #FFF3E6;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
+    display: grid;
     height: 100%;
-   
-    .bottom{
+    grid-template-columns: 50% 50%;
+    .left{
+        color: var(--primary-purple);
+        background-color: #FFF3E6;
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        @media(max-width: 992px){
-                width: 90%;
-        }
-        width: 30%;
+        align-items: center;
+        font-weight: 700;
+        height: 100%;
         .card{
             font-weight: 700;
             border-radius: 20px;
             box-shadow: 4px 4px 30px 0 rgba(0,0,0,0.2);
-            width: 100%;
+            width: 50%;
             padding: 10px;
+            height: auto;
             
+            @media (max-width : 992px) {
+                width: 90%;
+            }
             .top{
                 display: grid;
                 width: 100%;
@@ -84,7 +84,7 @@
                     }
                 }
                 .registre{
-                    padding: 10px;
+                    padding: 20px;
                     display: flex;
                     justify-content: center;
                     color: var(--primary-purple);
@@ -93,12 +93,12 @@
                 }
             }
         }
-        .registre{
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            color: var(--primary-purple);
-            font-weight: 700;
-        }
+    }
+    .right{
+        background-image: url('/assets/img/login-dog-page.jpg');
+        background-repeat: no-repeat;
+        width: 100%;
+        background-position: 70% 40%;
+        background-size: 100%;
     }
 }
