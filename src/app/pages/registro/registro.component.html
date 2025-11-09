@@ -15,122 +15,36 @@
         </div>
         <div class="formContainer">
             <div class="formCard">
-            <div class="top">
-                <div class="formTitle">
-                    <div class="h1">
-                        <h1>{{tituloStep}}</h1>
-                        <h3 id="subtitle">{{subtituloStep}}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="bottom">
-                <mat-stepper linear="true" headerPosition="bottom" #stepper (selectionChange)="atualizarTitulos($event)"> 
-                    <mat-step [stepControl]="roleForm" label="Função">
-                        <form [formGroup]="roleForm">
-                            <ng-template matStepLabel>Função</ng-template>
-                            <div class="first">
-                                
-                                <button mat-flat-button (click)="form('user'); stepper.next()" class="btn-fst">Quero adotar um animal!</button>
-                                    <div class="line">
-                                        <span>OU</span>
-                                    </div>
-                                <button mat-flat-button (click)="form('tutor'); stepper.next()" class="btn-fst">Possuo animais para serem adotados!</button>           
+                <form [formGroup]="usuarioForm">
+                        <div class="formTitle">
+                            <div class="h1">
+                                <h1>Crie sua Conta</h1>
                             </div>
-                        </form>
-                    </mat-step>
-                    <mat-step label="Dados pessoais">
-                        <div class="snd">
-                            <ng-container [ngSwitch]="role">
-                                <ng-container *ngSwitchCase="'user'">
-                                    <form [formGroup]="currentForm">
-                    
-                                        <div class="firstRow">
-                                            <div class="nome">
-                                                <span>Nome*</span>
-                                                <mat-form-field appearance="outline" class="text-input">
-                                                    <input matInput formControlName="primeiroNome" placeholder="Seu nome" class="input">        
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="nome">
-                                                <span>Sobrenome*</span>
-                                                <mat-form-field appearance="outline" class="text-input">
-                                                    <input matInput formControlName="sobrenome" placeholder="Seu sobrenome" class="input">        
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                        <div class="sndRow">
-                                            <div class="cpf">
-                                                <span>CPF*</span>
-                                                <mat-form-field appearance="outline" class="text-input">
-                                                    <input matInput formControlName="cpf" placeholder="000.000.000-00" mask="000.000.000-00" class="input">        
-                                                </mat-form-field>
-                                            </div>
-                                          
-                                        </div>
-                                    </form>
-                                </ng-container>
-                            </ng-container>
-                            <div class="bts">
-                                <button mat-flat-button matStepperPrevious class="btn">Voltar</button>
-                                <button mat-flat-button matStepperNext class="btn">Avançar</button>
+                            <div class="h2">
+                                <h3>Preencha os campos abaixo para se cadastrar.</h3>
                             </div>
                         </div>
-                    </mat-step>
-                    <mat-step label="Dados de login">
-                        <ng-container [ngSwitch]="role">
-                            <ng-container *ngSwitchCase="'user'">
-                                <form [formGroup]="currentForm">
-                                    <div class="trd">
-                                        <span>Email*</span>
-                                        <mat-form-field appearance="outline" class="text-input">
-                                            <input matInput formControlName="email" placeholder="seu@email.com" class="input">        
-                                        </mat-form-field>
-                                        <span>Senha*</span>
-                                        <mat-form-field appearance="outline" class="text-input">
-                                            <input matInput formControlName="senha" placeholder="Sua senha" class="password-input" [type]="pwd() ? 'password' : 'text'">        
-                                            <button type="button" mat-icon-button matSuffix [attr.aria-label]="'Hide password'"  (click)="hidePwd($event)">
-                                            <mat-icon class="hide-icon">{{pwd() ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                            </button>
-                                        </mat-form-field>
-                                        <span>Confirme sua senha*</span>
-                                        <mat-form-field appearance="outline" class="text-input" >
-                                            <input matInput formControlName="confirmarSenha" placeholder="Sua senha" class="password-input" [type]="pwdConfirmation() ? 'password' : 'text'">        
-                                            <button type="button" mat-icon-button matSuffix [attr.aria-label]="'Hide password'" (click)="hidePwdConfirmation($event)">
-                                            <mat-icon class="hide-icon">{{pwdConfirmation() ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                        </button>
-                                        </mat-form-field>
-                                        <div class="phone">
-                                            <div class="ddd">
-                                                <span>DDD*</span>
-                                                <mat-form-field appearance="outline" class="text-input">
-                                                    <input matInput formControlName="ddd" placeholder="(00)" mask="00"class="input">        
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="number">
-                                                <span>Telefone*</span>
-                                                <mat-form-field appearance="outline" class="text-input">
-                                                    <input matInput formControlName="telefone" placeholder="0000-0000" mask="0000-0000" class="input">        
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </ng-container>
-                        </ng-container>
-                        <div class="bts">
-                                <button mat-flat-button matStepperPrevious class="btn">Voltar</button>
-                                <button mat-flat-button matStepperNext class="btn">Avançar</button>
-                        </div>
-                        </mat-step>
-                        <mat-step label="Finalizar">
-                            <div class="bts">
-                            <button mat-flat-button class="btn-submit" (click)="submit()">Finalizar!</button>
+                        <div class="formContent">
+                            <div class="firstRow">
+                                <div class="nome">
+                                    <span>Nome*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="primeiroNome" placeholder="Seu nome" class="input">        
+                                    </mat-form-field>
+                                </div>
+                                <div class="nome">
+                                    <span>Sobrenome*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="sobrenome" placeholder="Seu sobrenome" class="input">        
+                                    </mat-form-field>
+                                </div>
                             </div>
-                        </mat-step>
-                    </mat-stepper>
-                </div>
-                <!-- <form [formGroup]="usuarioForm">
-               
+                            <div class="secondRow">
+                                <span>CPF*</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <input matInput formControlName="cpf" placeholder="000.000.000-00" mask="000.000.000-00" class="input">        
+                                </mat-form-field>
+                            </div>
                             <div class="thirdRow">
                                 <span>Email*</span>
                                 <mat-form-field appearance="outline" class="text-input">
@@ -154,12 +68,25 @@
                                 </button>
                                 </mat-form-field>
                             </div>
-                            
+                            <div class="fifthRow">
+                                <div class="ddd">
+                                    <span>DDD*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="ddd" placeholder="(51)" mask="00"class="input">        
+                                    </mat-form-field>
+                                </div>
+                                <div class="telefone">
+                                    <span>Telefone*</span>
+                                    <mat-form-field appearance="outline" class="text-input">
+                                        <input matInput formControlName="telefone" placeholder="(9)0000-0000" mask="900000000" class="input">        
+                                    </mat-form-field>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 <div class="buttons">
                     <button mat-flat-button type="submit" (click)="submit()" class="send-btn">Criar Conta</button>
-                </div> -->
+                </div>
             </div>
             
         </div>

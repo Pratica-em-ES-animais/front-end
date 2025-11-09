@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,57 +10,35 @@ import { Router } from '@angular/router';
 import { User } from '../../core/models/user-model';
 import { RegistroUsuarioService } from '../../core/services/registro-usuario.service';
 import { CommonModule } from '@angular/common';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatRadioModule } from '@angular/material/radio';
-import { CdkStepperModule, StepperSelectionEvent } from "@angular/cdk/stepper";
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-registro',
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule,
-            NgxMaskDirective, MatIconModule, CommonModule, MatStepperModule, MatRadioModule,
-            FormsModule, CdkStepperModule, MatDatepickerModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, NgxMaskDirective, MatIconModule, CommonModule],
   templateUrl: './registro.component.html',
-  providers: [provideNgxMask(), provideNativeDateAdapter()],
+  providers: [provideNgxMask()],
   styleUrl: './registro.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class RegistroComponent {
-  protected userDataForm : FormGroup;
-  protected currentForm : FormGroup;
-
-
-  protected roleForm : FormGroup;
-  protected tituloStep = "Escolha seu perfil";
-  protected subtituloStep = "Selecione sua função";
-
-
+  protected usuarioForm : FormGroup;
   protected pwd = signal(true);
   protected pwdConfirmation = signal(true);
   private readonly router: Router;
-  protected role : string | null = null;
-  protected tutorDataForm: FormGroup;
-
+  
   constructor(private fb: FormBuilder, private readonly service : RegistroUsuarioService){
     this.router = inject(Router);
-    this.roleForm = this.fb.group({
-      role : [null, [Validators.required]]
-    });
-    this.userDataForm = this.fb.group({
+    this.usuarioForm = this.fb.group({
       primeiroNome : [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       sobrenome: [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-      cpf: [null, [Validators.required]],
+      cpf: [null, [Validators.required, Validators.pattern('[0-9]{11}')]],
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
       confirmarSenha: [null, Validators.required],
-      ddd: [null, [Validators.required]],
-      telefone: [null, [Validators.required]]
+      ddd: [null, [Validators.required, Validators.pattern('[0-9]{2}')]],
+      telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]]
     });
-    this.tutorDataForm = this.fb.group({});
-    this.currentForm = this.fb.group({});
-
   }
  
   hidePwd(event:MouseEvent){
@@ -80,47 +58,21 @@ export class RegistroComponent {
   }
 
   submit(){
-    if(this.currentForm.invalid){
-      console.log(this.currentForm.controls);
+    if(this.usuarioForm.invalid){
       return;
     }
-    console.log(this.currentForm.value);
-
     const user : User = {
-      primeiroNome :  this.currentForm.value.primeiroNome,
-      sobrenome : this.currentForm.value.sobrenome,
-      cpf : this.currentForm.value.cpf,
-      email : this.currentForm.value.email,
-      senha : this.currentForm.value.senha,
-      ddd : this.currentForm.value.ddd,
-      telefone : this.currentForm.value.telefone
+      primeiroNome :  this.usuarioForm.value.primeiroNome,
+      sobrenome : this.usuarioForm.value.sobrenome,
+      cpf : this.usuarioForm.value.cpf,
+      email : this.usuarioForm.value.email,
+      senha : this.usuarioForm.value.senha,
+      ddd : this.usuarioForm.value.ddd,
+      telefone : this.usuarioForm.value.telefone
     }
     this.service.createUser(user);
-    this.router.navigate(['/']);
   }
 
-  form(role : string){
-    this.role = role;
-    this.roleForm.patchValue({ role: role });
-    this.currentForm = role === 'user' ? this.userDataForm : this.tutorDataForm;
-    
-  }
-
-  atualizarTitulos(event : StepperSelectionEvent){
-    if(this.role === 'user'){
-      switch(event.selectedIndex){
-        case 0:
-          this.tituloStep = "Escolha seu perfil";
-          this.subtituloStep = "Selecione sua função";
-          break;
-        case 1:
-          this.tituloStep = "Preencha seus dados pessoais";
-          this.subtituloStep = '';
-          break;
-        
-      }
-    }
-  }
 }
 
 
