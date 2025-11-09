@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 import { User } from '../../core/models/user-model';
 import { RegistroUsuarioService } from '../../core/services/registro-usuario.service';
 import { CommonModule } from '@angular/common';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @Component({
   selector: 'app-registro',
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, NgxMaskDirective, MatIconModule, CommonModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, 
+            MatButtonModule, NgxMaskDirective, MatIconModule, CommonModule,
+            MatButtonToggleModule],
   templateUrl: './registro.component.html',
   providers: [provideNgxMask()],
   styleUrl: './registro.component.scss',
@@ -37,7 +40,8 @@ export class RegistroComponent {
       senha: [null, Validators.required],
       confirmarSenha: [null, Validators.required],
       ddd: [null, [Validators.required, Validators.pattern('[0-9]{2}')]],
-      telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]]
+      telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]],
+      role: ['user' as 'user' | 'tutor' ]
     });
   }
  
@@ -72,6 +76,8 @@ export class RegistroComponent {
     }
     this.service.createUser(user);
   }
+
+
 
 }
 

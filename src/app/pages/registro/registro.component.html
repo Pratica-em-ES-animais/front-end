@@ -24,6 +24,19 @@
                                 <h3>Preencha os campos abaixo para se cadastrar.</h3>
                             </div>
                         </div>
+                       <div class="toggle-group">
+                         <mat-button-toggle-group
+                            formControlName="role"
+                            aria-label="Select your role"
+                            >
+                            <mat-button-toggle value="user" >
+                                Quero adotar!
+                            </mat-button-toggle>
+                            <mat-button-toggle value="tutor">
+                                Sou tutor
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                       </div>
                         <div class="formContent">
                             <div class="firstRow">
                                 <div class="nome">
@@ -72,13 +85,13 @@
                                 <div class="ddd">
                                     <span>DDD*</span>
                                     <mat-form-field appearance="outline" class="text-input">
-                                        <input matInput formControlName="ddd" placeholder="(51)" mask="00"class="input">        
+                                        <input matInput formControlName="ddd" placeholder="00" mask="00"class="input">        
                                     </mat-form-field>
                                 </div>
                                 <div class="telefone">
                                     <span>Telefone*</span>
                                     <mat-form-field appearance="outline" class="text-input">
-                                        <input matInput formControlName="telefone" placeholder="(9)0000-0000" mask="900000000" class="input">        
+                                        <input matInput formControlName="telefone" placeholder="0000-0000" mask="0000-0000" class="input">        
                                     </mat-form-field>
                                 </div>
                             </div>
