@@ -1,20 +1,27 @@
+
+
 .registro-page{
   display: block;                 /* stack by default */
-  min-height: 100dvh;             /* better on mobile than 100vh */
+  height: 100%;             /* better on mobile than 100vh */
   width: 100%;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   .right{
-    display: none;                /* hide hero on small screens */
+    @media (max-width:992px) {
+      display: none;
+    }
+    display: block;
     background-image: url('/assets/img/registro-background-image3.jpg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;       /* fill area nicely */
-    width: 100%;
-    height: 40vh;                 /* will only apply when shown (>=992px) */
+    min-height:  100%;
+    height : auto;                 /* will only apply when shown (>=992px) */
   }
 
   .left{
     width: 100%;
+    height: 100%;
     background-color: #fff3e6;
     display: flex;
     align-items: center;
@@ -75,22 +82,25 @@
         justify-content: flex-start;
         padding: clamp(16px, 4vw, 30px);
         width: 100%;
-        max-width: 760px;               /* keeps a comfy line length on desktop */
+        max-width: 760px;             
         font-weight: 700;
         border-radius: 20px;
         box-shadow: 4px 4px 30px 0 rgba(0,0,0,0.2);
-        background: #fff;               /* ensure contrast over peach bg */
-
-        .formTitle{ width: 100%; }
+        background: #fff;   
+        font-size: small;           
         
+        .formTitle{ 
+          width: 100%;
+        }
+        
+        .toggle-group{
+          display: flex;
+          justify-content: center;
+        }
         .formContent{
-        
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 12px;
-
-          /* input text blocks */
           .text-input{
             width: 100%;
 
@@ -102,29 +112,22 @@
               }
             }
           }
-
-          /* Rows break into columns only on larger screens */
-          .firstRow,
-          .fifthRow{
-            display: grid;
-            grid-template-columns: 1fr;     /* stack on mobile */
-            gap: 12px;
+          .form-row{
             width: 100%;
-          }
-
-          .firstRow .nome{ width: 100%; }
-
-          .secondRow{ width: 100%; }
-
-          .forthRow{
-            .hide-icon{ color: var(--primary-purple); }
-          }
-
-          .fifthRow{
             .ddd, .telefone{
               display: flex;
               flex-direction: column;
               width: 100%;                  /* full width on mobile */
+            }
+          }
+          .form-row-cols-2{
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px;
+            width: 100%;
+            .ong{
+              display: flex;
+              flex-direction: column;
             }
           }
         }
@@ -150,69 +153,12 @@
           }
         }
 
-        /* Card look is heavy for mobile—soften it */
         @media (max-width: 991.98px){
           border-radius: 0;
           box-shadow: none;
           background: transparent;
         }
       }
-    }
-  }
-}
-
-/* ========== ≥992px: two-column layout, show hero, form rows side-by-side ========== */
-@media (min-width: 992px){
-  .registro-page{
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 50/50 but flexible */
-    align-items: stretch;
-
-    .right{
-      display: block;
-      min-height: 100%;
-      height: auto;                 /* let it fill the column */
-      background-position: 70% 50%;
-      background-size: 115%;
-    }
-
-    .left{
-        justify-content: center;
-        .formContainer .formCard {
-            .toggle-group{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                .role-toggle {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    width: 100%;
-                    max-width: 520px;
-                    margin: 12px 0 24px;
-                }
-            }
-            
-            .formContent{
-                .firstRow{ 
-                    grid-template-columns: 1fr 1fr; 
-                }
-                .fifthRow{ 
-                    display: flex;
-                    width: 100%;
-                    flex-direction: row;
-                    .ddd{
-                        display: flex;
-                        flex-direction: column;
-                        width: 30%;                  /* full width on mobile */
-                    }
-                    .telefone{
-                        display: flex;
-                        flex-direction: column;
-                        width: 70%;
-                    }
-                }
-            }
-        }
     }
   }
 }

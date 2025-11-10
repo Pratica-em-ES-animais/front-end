@@ -11,13 +11,15 @@ import { User } from '../../core/models/user-model';
 import { RegistroUsuarioService } from '../../core/services/registro-usuario.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelect, MatOption, MatSelectModule } from "@angular/material/select";
+import { Ong } from '../../core/models/ong.model';
 
 
 @Component({
   selector: 'app-registro',
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, 
-            MatButtonModule, NgxMaskDirective, MatIconModule, CommonModule,
-            MatButtonToggleModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule,
+    MatButtonModule, NgxMaskDirective, MatIconModule, CommonModule,
+    MatButtonToggleModule, MatSelect, MatOption, MatSelectModule],
   templateUrl: './registro.component.html',
   providers: [provideNgxMask()],
   styleUrl: './registro.component.scss',
@@ -26,6 +28,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 export class RegistroComponent {
   protected usuarioForm : FormGroup;
+  protected ongs : Ong[];
   protected pwd = signal(true);
   protected pwdConfirmation = signal(true);
   private readonly router: Router;
@@ -43,6 +46,30 @@ export class RegistroComponent {
       telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]],
       role: ['user' as 'user' | 'tutor' ]
     });
+
+    /*
+      Dados mockados para fins de testes.
+    */
+    this.ongs = [{name: "Fada"},
+                 {name: "Instituto Ampara Animal"},
+                 {name: "Instituto Caramelo"},
+                 {name: "União Internacional Protetora dos Animais"},
+                 {name: "Instituto Luisa Mell"},
+                 {name: "S.O.S. Animais e Plantas"},
+                 {name: "Cão Sem Dono"},
+                 {name: "Projeto Segunda Chance"},
+                 {name: "Patinha Feliz"},
+                 {name: "Associação Natureza em Forma"},
+                 {name: "Adote Um Focinho"},
+                 {name: "Projeto CEL - Cães Especiais Lar"},
+                 {name: "Arca Brasil"},
+                 {name: "Instituto Nina Rosa"},
+                 {name: "G.A.R.R.A. - Grupo de Ação, Resgate e Reabilitação Animal"},
+                 {name: "Projeto Bichos do Gueto"},
+                 {name: "Anjos dos Bichos"},
+                 {name: "Projeto AdoCão"},
+                 {name: "Instituto Santo Pet"},
+                 {name: "Ampara Silvestre"}];
   }
  
   hidePwd(event:MouseEvent){
@@ -50,11 +77,7 @@ export class RegistroComponent {
     event.stopPropagation();
   }
 
-  
-  hidePwdConfirmation(event:MouseEvent){
-    this.pwdConfirmation.set(!this.pwdConfirmation());
-    event.stopPropagation();
-  }
+
 
   redirect(event:MouseEvent){
     this.router.navigate(['/']);
@@ -76,9 +99,6 @@ export class RegistroComponent {
     }
     this.service.createUser(user);
   }
-
-
-
 }
 
 
