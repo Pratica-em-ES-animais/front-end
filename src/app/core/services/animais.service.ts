@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Animal } from '../models/animal.model';
 
 @Injectable({ providedIn: 'root' })
 export class AnimaisService {
-  private animais: Animal[] = [
+  private animaisInicial: Animal[] = [
     {
       id: '1',
       name: 'Rex',
@@ -158,7 +159,21 @@ export class AnimaisService {
     }
   ];
 
+  private animaisSubject = new BehaviorSubject<Animal[]>(this.animaisInicial);
+  animais$ = this.animaisSubject.asObservable();
+
   getAll(): Animal[] {
-    return this.animais;
+    return this.animaisSubject.value;
+  }
+
+  addAnimal(animal: Omit<Animal, 'id'>) {
+    const novoAnimal: Animal = {
+      ...animal,
+      id: "1",
+      photo: animal.photo || 'https://placehold.co/400x300?text=Novo+Animal'
+    };
+    const atual = [...this.animaisSubject.value, novoAnimal];
+    this.animaisSubject.next(atual);
+    console.log('✅ Animal adicionado:', novoAnimal);
   }
 }
