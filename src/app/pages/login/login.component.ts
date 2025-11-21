@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Component, signal, Signal } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButton } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { LoginService } from '../../core/services/login.service';
+import { Login } from '../../core/models/login.model';
+
 @Component({
   selector: 'app-login',
   imports: [MatFormField, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButton,
@@ -16,18 +19,37 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   protected loginForm : FormGroup;
-  constructor(private fb : FormBuilder, private router : Router){
+  protected senhaInvalida = signal(false);
+  constructor(private fb : FormBuilder, private router : Router, private loginService : LoginService){
     this.loginForm = fb.group({
-      email: [null,[Validators.email, Validators.required]],
-      senha: [null, [Validators.required]]
+      email : new FormControl<string>('',[Validators.email, Validators.required]),
+      password: ['', [Validators.required]]
     });
   }
   // para apresentar vou redirecionar de uma vez, sem mandar pro back-end.
   submit() {
-    console.log('Submiting');
+    if(!this.loginForm.valid){
+      console.log('Opa!');
+      return;
+    }
+    const body : Login = {
+      email : this.loginForm.get('email')?.value,
+      senha : this.loginForm.get('password')?.value
+    }
+    this.loginService.login(body).subscribe({
+      next: (res) =>{
+        this.router.navigate(['/main-page'])
+      },
+      error : (res) =>{
+        this.senhaInvalida.set(true);
+        console.log(res);
+      }
+    });
+
   }
 
   back(){
     this.router.navigate(['/']);
   }
+
 }
