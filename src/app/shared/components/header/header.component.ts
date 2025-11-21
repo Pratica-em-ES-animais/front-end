@@ -4,6 +4,8 @@ import { UserStateService, UserRole } from '../../../core/services/user-state.se
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CadastrarAnimalModalComponent } from '../cadastrar-animal-modal/cadastrar-animal-modal.component';
+import { Role } from '../../../core/models/role.model';
+import { LoginService } from '../../../core/services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +15,15 @@ import { CadastrarAnimalModalComponent } from '../cadastrar-animal-modal/cadastr
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Input() role!: UserRole;
 
-  constructor(private userState: UserStateService, private dialog: MatDialog, private router: Router) {}
+  @Input() role?: Role | null;
+  Roles = Role;
+
+  constructor(private userState: UserStateService, private loginService : LoginService,private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.userState.userRole$.subscribe(role => this.role = role);
+    console.log(this.role);
   }
 
   irParaHome() {
@@ -44,5 +49,11 @@ export class HeaderComponent implements OnInit {
 
   logon() {
     this.router.navigate(['/registro']);
+  }
+
+  logout(){
+    this.loginService.logout();
+    this.userState.reset();
+    this.router.navigate(['/'])
   }
 }

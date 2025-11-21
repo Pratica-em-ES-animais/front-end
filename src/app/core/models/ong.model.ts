@@ -1,3 +1,8 @@
 export interface Ong{
-    name: string
+    // id : string,
+    // cnpj : string,
+    name : string,
+    // email : string,
+    // ddd : string,
+    // phone : string,
 }

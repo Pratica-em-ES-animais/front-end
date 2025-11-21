@@ -6,6 +6,7 @@ import { Animal } from '../../../core/models/animal.model';
 import { UserRole } from '../../../core/services/user-state.service';
 import { AnimalModalComponent } from '../animal-modal/animal-modal.component';
 import { AnimaisService } from '../../../core/services/animais.service';
+import { Role } from '../../../core/models/role.model';
 
 @Component({
   selector: 'app-animal-card',
@@ -16,7 +17,7 @@ import { AnimaisService } from '../../../core/services/animais.service';
 })
 export class AnimalCardComponent {
   @Input() animal!: Animal;
-  @Input() role: UserRole = 'NOLOG';
+  @Input() role: Role | null = null;
 
   constructor(
     private dialog: MatDialog,
