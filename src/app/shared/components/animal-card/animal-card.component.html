@@ -2,7 +2,7 @@
   <div class="header-bar"></div>
 
   <div class="photo-wrapper">
-    <img [src]="animal.photo" [alt]="animal.name" />
+    <img [src]="getPhoto()" [alt]="animal.name" />
     <span class="status-tag" [class]="animal.status.toLowerCase()">
       {{ animal.status }}
     </span>
@@ -10,12 +10,15 @@
 
   <div class="animal-info">
     <h3>{{ animal.name }}</h3>
-    <p class="species">{{ animal.species }} • {{ animal.breed }}</p>
+
+  <p class="species">
+    {{ formatEnum(animal.species) }} • {{ getBreed() }}
+  </p>
 
     <div class="tags">
       <span class="tag">{{ animal.age }} anos</span>
-      <span class="tag">{{ animal.sex }}</span>
-      <span class="tag">{{ animal.size }}</span>
+      <span class="tag">{{ formatEnum(animal.sex) }}</span>
+      <span class="tag">{{ formatEnum(animal.size) }}</span>
     </div>
   </div>
 </div>

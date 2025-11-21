@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserStateService, UserRole } from '../../../core/services/user-state.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CadastrarAnimalModalComponent } from '../cadastrar-animal-modal/cadastrar-animal-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,12 @@ export class HeaderComponent implements OnInit {
   }
 
   cadastrarAnimal() {
-    console.log('Abrindo modal de cadastro de animal...');
+    this.dialog.open(CadastrarAnimalModalComponent, {
+      width: 'auto',          // deixa o CSS controlar
+      maxWidth: '1400px',
+      height: '90vh',
+      panelClass: 'custom-modal',
+    });
   }
 
   login() {
