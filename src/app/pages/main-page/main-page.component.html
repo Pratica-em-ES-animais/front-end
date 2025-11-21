@@ -1,12 +1,4 @@
-<!-- Barra de debug -->
-<div class="debug-bar">
-  <button mat-stroked-button color="primary" (click)="setUserType('NOLOG')">No Log</button>
-  <button mat-stroked-button color="accent" (click)="setUserType('ADOTANTE')">Adotante</button>
-  <button mat-stroked-button color="warn" (click)="setUserType('TUTOR')">Tutor</button>
-  <span class="status">Usuário atual: {{ role }}</span>
-</div>
-
-<app-header [role]="role"></app-header>
+<app-header [role]="userRole"></app-header>
 
 <div class="main-content">
   <div class="sidebar">
@@ -106,7 +98,7 @@
         <button mat-stroked-button color="warn" (click)="limpar()">Limpar</button>
       </div>
 
-      <ng-container *ngIf="role === 'ADOTANTE'">
+      <ng-container *ngIf="userRole === Roles.USER">
         <button mat-flat-button color="accent">Usar IA de compatibilidade</button>
       </ng-container>
 
@@ -118,7 +110,7 @@
     <app-animal-card
       *ngFor="let a of animaisFiltrados"
       [animal]="a"
-      [role]="role">
+      [role]="userRole">
     </app-animal-card>
 
     <div *ngIf="animaisFiltrados.length === 0" class="no-results">
