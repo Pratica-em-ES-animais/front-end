@@ -2,9 +2,8 @@
   <h2>Cadastrar Novo Animal</h2>
 
   <form [formGroup]="animalForm" class="modal-content">
-    <!-- 🔹 Metade Esquerda -->
     <div class="left-side">
-      <!-- Upload quadrado -->
+
       <div
         class="image-upload"
         [class.dragging]="dragOver"
@@ -22,7 +21,6 @@
         </ng-template>
       </div>
 
-      <!-- Campos básicos -->
       <div class="basic-info">
         <div class="form-row">
           <mat-form-field appearance="outline">
@@ -39,18 +37,33 @@
         </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>Raça</mat-label>
-            <input matInput formControlName="breed" />
+
+          <!-- Raça de Cachorro -->
+          <mat-form-field *ngIf="animalForm.get('species')?.value === 'Cachorro'" appearance="outline">
+            <mat-label>Raça (Cachorro)</mat-label>
+            <mat-select formControlName="dogBreed">
+              <mat-option *ngFor="let r of dogBreeds" [value]="r">{{ r }}</mat-option>
+            </mat-select>
           </mat-form-field>
 
+          <!-- Raça de Gato -->
+          <mat-form-field *ngIf="animalForm.get('species')?.value === 'Gato'" appearance="outline">
+            <mat-label>Raça (Gato)</mat-label>
+            <mat-select formControlName="catBreed">
+              <mat-option *ngFor="let r of catBreeds" [value]="r">{{ r }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Sexo -->
           <mat-form-field appearance="outline">
             <mat-label>Sexo</mat-label>
             <mat-select formControlName="sex">
               <mat-option *ngFor="let s of sexos" [value]="s">{{ s }}</mat-option>
             </mat-select>
           </mat-form-field>
+
         </div>
+
 
         <div class="form-row">
           <mat-form-field appearance="outline">
@@ -73,7 +86,6 @@
       </div>
     </div>
 
-    <!-- 🔹 Metade Direita -->
     <div class="right-side">
       <div class="form">
         <div class="form-row">

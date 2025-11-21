@@ -2,7 +2,7 @@
   <div class="modal-content">
 
     <div class="image-section">
-      <img [src]="data.animal.photo" [alt]="data.animal.name" />
+      <img [src]="getPhoto()" [alt]="data.animal.name" />
       <span class="status-tag" [class]="data.animal.status.toLowerCase()">
         {{ data.animal.status }}
       </span>
@@ -12,14 +12,14 @@
       <h2>{{ data.animal.name }}</h2>
 
       <div class="info-grid">
-        <div><strong>Espécie:</strong> {{ data.animal.species }}</div>
-        <div><strong>Raça:</strong> {{ data.animal.breed }}</div>
-        <div><strong>Sexo:</strong> {{ data.animal.sex }}</div>
+        <div><strong>Espécie:</strong> {{ formatEnum(data.animal.species) }}</div>
+        <div><strong>Raça:</strong> {{ formatEnum(getBreed()) }}</div>
+        <div><strong>Sexo:</strong> {{ formatEnum(data.animal.sex) }}</div>
         <div><strong>Idade:</strong> {{ data.animal.age }} anos</div>
-        <div><strong>Tamanho:</strong> {{ data.animal.size }}</div>
-        <div><strong>Temperamento:</strong> {{ data.animal.temperament }}</div>
-        <div><strong>Energia:</strong> {{ data.animal.energy }}</div>
-        <div><strong>Sociabilidade:</strong> {{ data.animal.sociability }}</div>
+        <div><strong>Tamanho:</strong> {{ formatEnum(data.animal.size) }}</div>
+        <div><strong>Temperamento:</strong> {{ formatEnum(data.animal.temperament) }}</div>
+        <div><strong>Energia:</strong> {{ formatEnum(data.animal.energy) }}</div>
+        <div><strong>Sociabilidade:</strong> {{ formatEnum(data.animal.sociability) }}</div>
         <div><strong>Saúde:</strong> {{ data.animal.health_details }}</div>
       </div>
 
@@ -30,7 +30,6 @@
     </div>
   </div>
 
-
   <div class="adopt-section" *ngIf="data.role === 'ADOTANTE'">
     <button mat-flat-button color="primary" class="adopt-btn">
       Adotar {{ data.animal.name }}
@@ -38,11 +37,7 @@
   </div>
 
   <div class="adopt-section nolog" *ngIf="data.role === 'NOLOG'">
-    <button
-      mat-flat-button
-      class="adopt-btn disabled"
-      (click)="login()"
-    >
+    <button mat-flat-button class="adopt-btn disabled" (click)="login()">
       Faça login para adotar
     </button>
   </div>
