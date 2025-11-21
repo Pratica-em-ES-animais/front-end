@@ -67,7 +67,11 @@
                             color: var(--primary-purple);
                         }
                     }
-                
+                    .senha-invalida{
+                        display: flex;
+                        justify-content: center;
+                        padding: 10px;
+                    }
                     
                 }
                 .btn{

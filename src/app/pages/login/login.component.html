@@ -18,14 +18,21 @@
                         <div class="inputs">
                             <span class="hint">Email*</span>
                             <mat-form-field appearance="outline" class="input">
-                                <input matInput placeholder="Seu email"  formControlName="email">
+                                <input matInput placeholder="Seu email"  formControlName="email" type="email">
                             </mat-form-field>
                             <span class="hint">Senha*</span>
                             <mat-form-field appearance="outline"  class="input">
-                                    <input matInput placeholder="Sua senha" formControlName="senha">
+                                    <input matInput placeholder="Sua senha" formControlName="password" type="password">
                             </mat-form-field>
                         </div>
                     </form>
+                    @if(senhaInvalida()){
+                        <div class="senha-invalida">
+                        <span>
+                            Email ou senha inválidos.
+                        </span>
+                        </div>
+                    }
                 </div>
                 <div class="btn">
                     <button mat-flat-button class="submit-btn" (click)="back()">Voltar</button>
