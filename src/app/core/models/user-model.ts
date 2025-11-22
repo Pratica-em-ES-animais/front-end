@@ -1,9 +1,11 @@
 export interface User{
-    primeiroNome : string,
-    sobrenome : string,
+    firstName : string,
+    lastName : string,
     cpf : string,
     email: string,
     senha: string,
     ddd: string,
-    telefone: string
+    phone: string,
+    lifestyle : string,
+    preferences : string
 }

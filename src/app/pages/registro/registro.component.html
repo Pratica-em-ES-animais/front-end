@@ -15,6 +15,19 @@
         </div>
         <div class="formContainer">
             <div class="formCard">
+                <div class="toggle-group">
+                    <mat-button-toggle-group
+                    [(ngModel)]="role"
+                    aria-label="Select your role"
+                    >
+                    <mat-button-toggle value="user" >
+                        Quero adotar!
+                    </mat-button-toggle>
+                    <mat-button-toggle value="tutor">
+                        Sou tutor
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+                </div>
                 <form [formGroup]="usuarioForm">
                         <div class="formTitle">
                             <div class="h1">
@@ -24,19 +37,7 @@
                                 <h5>Preencha os campos abaixo para se cadastrar.</h5>
                             </div>
                         </div>
-                       <div class="toggle-group">
-                         <mat-button-toggle-group
-                            formControlName="role"
-                            aria-label="Select your role"
-                            >
-                            <mat-button-toggle value="user" >
-                                Quero adotar!
-                            </mat-button-toggle>
-                            <mat-button-toggle value="tutor">
-                                Sou tutor
-                            </mat-button-toggle>
-                        </mat-button-toggle-group>
-                       </div>
+                     
                         <div class="formContent">
                             <div class="form-row-cols-2">
                                 <div>
@@ -77,11 +78,11 @@
                                 <div class="telefone">
                                     <span>Telefone*</span>
                                     <mat-form-field appearance="outline" class="text-input">
-                                        <input matInput formControlName="telefone" placeholder="0000-0000" mask="0000-0000" class="input">        
+                                        <input matInput formControlName="telefone" placeholder="0000-0000" mask="00000-0000" class="input">        
                                     </mat-form-field>
                                 </div>
                             </div>
-                            @if(usuarioForm.get('role')!.value === 'tutor'){
+                            @if(role === 'tutor'){
                                 <div class="form-row-cols-2">
                                 <div>
                                     <span>Senha*</span>
@@ -108,6 +109,26 @@
                             </div>
                             }@else {
                             <div class="form-row">
+                                <span>Estilo de vida</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <textarea matInput formControlName="lifestyle" placeholder="Seu estilo de vida" class="input" rows="1"></textarea>
+                                <mat-error
+                                    *ngIf="formAtual.get('lifestyle')?.hasError('maxlength') && formAtual.get('lifestyle')?.touched">
+                                    Máximo de 100 caracteres.
+                                </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-row">
+                                <span>Estilo de vida</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <textarea matInput formControlName="preferences" placeholder="Suas preferências" class="input" rows="1"></textarea>
+                                <mat-error
+                                    *ngIf="formAtual.get('preferences')?.hasError('maxlength') && formAtual.get('preference')?.touched">
+                                    Máximo de 100 caracteres.
+                                </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-row">
                                 <span>Senha*</span>
                                 <mat-form-field appearance="outline" class="text-input">
                                     <input matInput formControlName="senha" placeholder="Sua senha" class="password-input" [type]="pwd() ? 'password' : 'text'">        
@@ -117,9 +138,6 @@
                                 </mat-form-field>
                             </div>
                             }
-                            
-                             
-                            
                         </div>
                     </form>
                 <div class="buttons">
