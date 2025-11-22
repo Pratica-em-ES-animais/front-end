@@ -169,4 +169,12 @@ filtrar(): void {
   setUserType(role: Role | null) {
     this.userState.setUserRole(role);
   }
+
+  carregarAnimais() {
+  this.animaisService.getAll().subscribe({
+    next: (animais) => this.animais = animais,
+    error: (err) => console.error(err)
+  });
+}
+
 }
