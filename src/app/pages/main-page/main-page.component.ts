@@ -12,6 +12,8 @@ import { UserRole, UserStateService } from '../../core/services/user-state.servi
 import { Animal } from '../../core/models/animal.model';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { AnimalCardComponent } from '../../shared/components/animal-card/animal-card.component';
+import { UserLogin } from '../../core/models/user-login.model';
+import { Role } from '../../core/models/role.model';
 
 @Component({
   selector: 'app-main-page',
@@ -33,11 +35,12 @@ import { AnimalCardComponent } from '../../shared/components/animal-card/animal-
 })
 export class MainPageComponent implements OnInit {
   form!: FormGroup;
+  Roles = Role;
   animais: Animal[] = [];
   animaisFiltrados: Animal[] = [];
   racasFiltradas: string[] = [];
-  role: UserRole = 'NOLOG';
-  
+  currentUser: UserLogin | null = null;
+  userRole : Role | null = null;
 
   especies = ['Cachorro', 'Gato'];
   sexos = ['M', 'F'];
@@ -75,6 +78,16 @@ ngOnInit(): void {
     status: ['']
   });
 
+  const stored = localStorage.getItem('currentUser');
+  if(stored){
+    this.currentUser = JSON.parse(stored) as UserLogin;
+    this.userRole = this.currentUser.role;
+    this.userState.setUserRole(this.userRole);
+
+    console.log(this.userRole);
+  }
+
+
   // CORREÇÃO: getAll() devolve Observable
   this.animaisService.getAll().subscribe(data => {
     this.animais = data;
@@ -83,7 +96,7 @@ ngOnInit(): void {
 
   this.form.valueChanges.subscribe(() => this.filtrar());
 
-  this.userState.userRole$.subscribe(role => this.role = role);
+  this.userState.userRole$.subscribe(role => this.userRole = role);
 
   // Atualiza raças ao mudar espécie
   this.form.controls['species'].valueChanges.subscribe(species => {
@@ -153,7 +166,7 @@ filtrar(): void {
     this.animaisFiltrados = [...this.animais];
   }
 
-  setUserType(role: UserRole) {
+  setUserType(role: Role | null) {
     this.userState.setUserRole(role);
   }
 

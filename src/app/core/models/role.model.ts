@@ -1,3 +1,3 @@
 export enum Role{
-    ONG, USER
+    ONG = 'ONG', USER = 'USER'
 }
