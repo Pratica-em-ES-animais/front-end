@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserStateService, UserRole } from '../../../core/services/user-state.service';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,8 @@ import { CadastrarAnimalModalComponent } from '../cadastrar-animal-modal/cadastr
 export class HeaderComponent implements OnInit {
   @Input() role!: UserRole;
 
+  @Output() animalCadastrado = new EventEmitter<void>();
+
   constructor(private userState: UserStateService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
@@ -29,12 +31,19 @@ export class HeaderComponent implements OnInit {
     console.log('Abrindo perfil...');
   }
 
-  cadastrarAnimal() {
-    this.dialog.open(CadastrarAnimalModalComponent, {
-      width: 'auto',          // deixa o CSS controlar
+cadastrarAnimal() {
+    const dialogRef = this.dialog.open(CadastrarAnimalModalComponent, {
+      width: 'auto',
       maxWidth: '1400px',
       height: '90vh',
       panelClass: 'custom-modal',
+    });
+
+    // 🔥 Quando fechar o modal
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {     // qualquer valor indica que o modal fechou com sucesso
+        this.animalCadastrado.emit();
+      }
     });
   }
 

@@ -198,7 +198,7 @@ async submit() {
       const uploadResp = await firstValueFrom(
         this.animaisService.uploadPhoto(createdAnimal.id, this.selectedFile)
       );
-
+      console.log("ID DO ANIMAL CRIADO: ", createdAnimal.id);
       console.log("✔️ RESPOSTA DO /upload-photo:", uploadResp);
 
       uploadedFilename = uploadResp.filename || '';
