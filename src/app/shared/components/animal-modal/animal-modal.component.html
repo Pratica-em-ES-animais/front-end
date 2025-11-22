@@ -31,7 +31,7 @@
   </div>
 
   <div class="adopt-section" *ngIf="data.role === 'USER'">
-    <button mat-flat-button color="primary" class="adopt-btn">
+    <button mat-flat-button color="primary" class="adopt-btn" (click)="createAdoption()">
       Adotar {{ data.animal.name }}
     </button>
   </div>
