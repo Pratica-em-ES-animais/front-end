@@ -30,13 +30,13 @@
     </div>
   </div>
 
-  <div class="adopt-section" *ngIf="data.role === 'ADOTANTE'">
+  <div class="adopt-section" *ngIf="data.role === 'USER'">
     <button mat-flat-button color="primary" class="adopt-btn">
       Adotar {{ data.animal.name }}
     </button>
   </div>
 
-  <div class="adopt-section nolog" *ngIf="data.role === 'NOLOG'">
+  <div class="adopt-section nolog" *ngIf="data.role === null">
     <button mat-flat-button class="adopt-btn disabled" (click)="login()">
       Faça login para adotar
     </button>

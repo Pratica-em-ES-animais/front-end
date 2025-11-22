@@ -10,6 +10,7 @@ import { UserRole } from '../../../core/services/user-state.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AnimaisService } from '../../../core/services/animais.service';
+import { Role } from '../../../core/models/role.model';
 
 @Component({
   selector: 'app-animal-modal',
@@ -22,7 +23,7 @@ export class AnimalModalComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { animal: Animal; role: UserRole },
+    public data: { animal: Animal; role: Role },
     private dialogRef: MatDialogRef<AnimalModalComponent>,
     private router: Router,
     private animaisService: AnimaisService

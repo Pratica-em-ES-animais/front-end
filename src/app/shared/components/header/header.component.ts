@@ -16,6 +16,8 @@ import { LoginService } from '../../../core/services/login.service';
 })
 export class HeaderComponent implements OnInit {
 
+  @Output() animalCadastrado = new EventEmitter<void>();
+
   @Input() role?: Role | null;
   Roles = Role;
 
