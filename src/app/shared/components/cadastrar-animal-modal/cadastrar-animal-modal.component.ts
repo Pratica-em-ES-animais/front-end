@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { firstValueFrom } from 'rxjs';
 import { AnimalCreateDto } from '../../../core/models/animal-create.dto';
+import { UserLogin } from '../../../core/models/user-login.model';
 
 @Component({
   selector: 'app-cadastrar-animal-modal',
@@ -150,7 +151,12 @@ async submit() {
 
   try {
     const fv = this.animalForm.value;
+    const tutorStored = localStorage.getItem("currentUser");
+    if (!tutorStored) {
+      return;
+    } 
 
+    const tutor = JSON.parse(tutorStored) as UserLogin
     const animalToCreate: AnimalCreateDto = {
       
       name: fv.name,
@@ -172,7 +178,7 @@ async submit() {
       description: fv.description ?? '',
       status: fv.status,
 
-      tutorIds: []
+      tutorIds: [tutor.id]
     };
 
     // =============================
