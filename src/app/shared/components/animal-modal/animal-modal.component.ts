@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AnimaisService } from '../../../core/services/animais.service';
 import { Role } from '../../../core/models/role.model';
+import { AdoptionService } from '../../../core/services/adoption.service';
+import { UserLogin } from '../../../core/models/user-login.model';
 
 @Component({
   selector: 'app-animal-modal',
@@ -26,7 +28,8 @@ export class AnimalModalComponent {
     public data: { animal: Animal; role: Role },
     private dialogRef: MatDialogRef<AnimalModalComponent>,
     private router: Router,
-    private animaisService: AnimaisService
+    private animaisService: AnimaisService,
+    private adoptionService: AdoptionService
   ) {}
 
     getPhoto(): string {
@@ -70,4 +73,52 @@ export class AnimalModalComponent {
 
     return map[value] ?? value;
   }
+
+  createAdoption() {
+    const userStored = localStorage.getItem("currentUser");
+    if (!userStored) {
+      console.error("Usuário não encontrado no localStorage");
+      return;
+    }
+
+    const user = JSON.parse(userStored) as { id: string };
+
+    const animalId = this.data.animal.id;
+    const tutorId = this.data.animal.tutorIds[0];
+    const adopterId = user.id;
+
+    if (!animalId || !tutorId || !adopterId) {
+      console.error("Dados insuficientes para criar uma adoção:", {
+        animalId,
+        tutorId,
+        adopterId
+      });
+      return;
+    }
+
+    const adoptionDto = {
+      animalId,
+      tutorId,
+      adopterId
+    };
+
+    // 🟦 PRINTA NO CONSOLE tudo o que será enviado para o backend
+    console.log("📤 Enviando DTO para /api/adoption/create:", adoptionDto);
+
+    this.adoptionService.createAdoption(adoptionDto).subscribe({
+      next: (response) => {
+        console.log("Adoção criada:", response);
+        this.dialogRef.close('adoptionSuccess');
+      },
+      error: (err) => {
+        console.error("❌ Erro ao criar adoção:", err);
+
+        // Se backend retornou algo no body do erro
+        if (err.error) {
+          console.error("Detalhes do erro retornado pelo backend:", err.error);
+        }
+      }
+    });
+  }
+
 }
