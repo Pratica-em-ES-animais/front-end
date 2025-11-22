@@ -104,7 +104,10 @@
                                             }
                                         </mat-select>
                                     </mat-form-field>
-                                    <span>Não encontrou sua Ong? <a href="localhost:4200/registro-ong">Cadastre-a!</a></span>
+                                    <div class="add-button-div">
+                                        <span>Não encontrou sua ONG?</span>
+                                        <button mat-icon-button class="add-button" (click)="openModal()"> <mat-icon>add</mat-icon></button>
+                                    </div>
                                 </div>
                             </div>
                             }@else {

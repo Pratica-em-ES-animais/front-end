@@ -15,6 +15,9 @@ import { Ong } from '../../core/models/ong.model';
 import { Router } from '@angular/router';
 import { User } from '../../core/models/user-model';
 import { UserLogin } from '../../core/models/user-login.model';
+import { MatDialog } from '@angular/material/dialog';
+import { RegistroOngModalComponent } from '../../shared/components/ong-modal/registro-ong-modal.component';
+import { config } from 'rxjs';
 
 
 @Component({
@@ -37,7 +40,7 @@ export class RegistroComponent {
   protected role : 'user' | 'tutor' = 'user';
   private readonly router: Router;
   
-  constructor(private fb: FormBuilder, private readonly service : RegistroUsuarioService){
+  constructor(private fb: FormBuilder, private readonly service : RegistroUsuarioService, private matDialog : MatDialog){
     this.router = inject(Router);
     this.usuarioForm = this.fb.group({
       primeiroNome : [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
@@ -61,31 +64,8 @@ export class RegistroComponent {
       telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]],
       ongs : [null, [Validators.required]]
     });
+    this.ongs = [];
 
-
-    /*
-      Dados mockados para fins de testes.
-    */
-    this.ongs = [{name: "Fada"},
-                 {name: "Instituto Ampara Animal"},
-                 {name: "Instituto Caramelo"},
-                 {name: "União Internacional Protetora dos Animais"},
-                 {name: "Instituto Luisa Mell"},
-                 {name: "S.O.S. Animais e Plantas"},
-                 {name: "Cão Sem Dono"},
-                 {name: "Projeto Segunda Chance"},
-                 {name: "Patinha Feliz"},
-                 {name: "Associação Natureza em Forma"},
-                 {name: "Adote Um Focinho"},
-                 {name: "Projeto CEL - Cães Especiais Lar"},
-                 {name: "Arca Brasil"},
-                 {name: "Instituto Nina Rosa"},
-                 {name: "G.A.R.R.A. - Grupo de Ação, Resgate e Reabilitação Animal"},
-                 {name: "Projeto Bichos do Gueto"},
-                 {name: "Anjos dos Bichos"},
-                 {name: "Projeto AdoCão"},
-                 {name: "Instituto Santo Pet"},
-                 {name: "Ampara Silvestre"}];
   }
  
   hidePwd(event:MouseEvent){
@@ -157,6 +137,14 @@ export class RegistroComponent {
         );
       }
     });
+  }
+  openModal(){
+    this.matDialog.open(
+      RegistroOngModalComponent,{
+        width: '90vh',
+        height: 'auto'
+      }
+    )
   }
 }
 
