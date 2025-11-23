@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,6 +18,10 @@ import { UserLogin } from '../../core/models/user-login.model';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistroOngModalComponent } from '../../shared/components/ong-modal/registro-ong-modal.component';
 import { config } from 'rxjs';
+import { OngDto } from '../../core/models/ong.dto';
+import { OngService } from '../../core/services/ong.service';
+import { Tutor } from '../../core/models/tutor-model';
+import { TutorService } from '../../core/services/tutor.service';
 
 
 @Component({
@@ -31,16 +35,17 @@ import { config } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class RegistroComponent {
+export class RegistroComponent implements OnInit{
   protected usuarioForm : FormGroup;
   protected tutorForm : FormGroup;
-  protected ongs : Ong[];
+  protected ongs : OngDto[] = [];
   protected pwd = signal(true);
   protected pwdConfirmation = signal(true);
   protected role : 'user' | 'tutor' = 'user';
   private readonly router: Router;
   
-  constructor(private fb: FormBuilder, private readonly service : RegistroUsuarioService, private matDialog : MatDialog){
+  constructor(private fb: FormBuilder, private readonly adotanteService : RegistroUsuarioService, private matDialog : MatDialog,
+     private ongService : OngService, private tutorService : TutorService ){
     this.router = inject(Router);
     this.usuarioForm = this.fb.group({
       primeiroNome : [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
@@ -62,10 +67,18 @@ export class RegistroComponent {
       senha: [null, Validators.required],
       ddd: [null, [Validators.required, Validators.pattern('[0-9]{2}')]],
       telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]],
-      ongs : [null, [Validators.required]]
+      ongId : [null, [Validators.required]]
     });
-    this.ongs = [];
 
+  }
+  ngOnInit(): void {
+    this.ongService.getAll().subscribe({
+      next: (res) =>
+        this.ongs = res,
+      error: (res) =>
+        console.error(res)
+      },
+    );
   }
  
   hidePwd(event:MouseEvent){
@@ -79,6 +92,7 @@ export class RegistroComponent {
   }
 
   submit(){
+    console.log(this.formAtual.value)
     if(this.formAtual.invalid){
       this.logFormErrors(this.formAtual);
       return;
@@ -86,30 +100,42 @@ export class RegistroComponent {
 
     if(this.formAtual == this.usuarioForm){
       const user : User = {
-        firstName :  this.usuarioForm.value.primeiroNome,
-        lastName : this.usuarioForm.value.sobrenome,
-        cpf : this.usuarioForm.value.cpf,
-        email : this.usuarioForm.value.email,
-        senha : this.usuarioForm.value.senha,
-        ddd : this.usuarioForm.value.ddd,
-        phone : this.usuarioForm.value.telefone,
-        lifestyle : this.usuarioForm.value.lifestyle,
-        preferences : this.usuarioForm.value.preferences
+        firstName :  this.formAtual.value.primeiroNome,
+        lastName : this.formAtual.value.sobrenome,
+        cpf : this.formAtual.value.cpf,
+        email : this.formAtual.value.email,
+        senha : this.formAtual.value.senha,
+        ddd : this.formAtual.value.ddd,
+        phone : this.formAtual.value.telefone,
+        lifestyle : this.formAtual.value.lifestyle,
+        preferences : this.formAtual.value.preferences
       }
-      console.log('tipo: ', this.role, 'payload', user);
-      this.service.createUser(user).subscribe({
-        next: (res) =>{
-          const storeUser : UserLogin = {
-            id : res.id,
-            firstName : res.firstName,
-            lastName : res.lastName,
-            role : res.role
-          }
-          localStorage.setItem('currentUser', JSON.stringify(storeUser));
+      user.phone = '9'+user.phone;
+      this.adotanteService.createUser(user).subscribe({
+        next: (res : UserLogin) =>{
+          localStorage.setItem('currentUser', JSON.stringify(res));
           this.router.navigate(['/main-page']);
         },
         error: (err)=>{
           console.error(err);
+        }
+      })
+    }else{
+      const tutor : Tutor = {
+        firstName :  this.formAtual.value.primeiroNome,
+        lastName : this.formAtual.value.sobrenome,
+        cpf : this.formAtual.value.cpf,
+        email : this.formAtual.value.email,
+        senha : this.formAtual.value.senha,
+        ddd : this.formAtual.value.ddd,
+        phone : this.formAtual.value.telefone,
+        ongId : this.formAtual.value.ongId
+      }
+      tutor.phone = '9'+tutor.phone;
+      this.tutorService.create(tutor).subscribe({
+        next: (res : UserLogin) =>{
+          localStorage.setItem('currentUser', JSON.stringify(res));
+          this.router.navigate(['/main-page']);
         }
       })
     }
@@ -139,12 +165,20 @@ export class RegistroComponent {
     });
   }
   openModal(){
-    this.matDialog.open(
+    const dialogRef = this.matDialog.open(
       RegistroOngModalComponent,{
         width: '90vh',
         height: 'auto'
       }
-    )
+    );
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result == true){
+        this.ongService.getAll().subscribe({
+          next: (res) => this.ongs = res,
+          error: (res) => console.error(res)
+        })
+      }
+    })
   }
 }
 

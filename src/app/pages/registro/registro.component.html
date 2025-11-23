@@ -28,7 +28,7 @@
                     </mat-button-toggle>
                 </mat-button-toggle-group>
                 </div>
-                <form [formGroup]="usuarioForm">
+                <form [formGroup]="formAtual">
                         <div class="formTitle">
                             <div class="h1">
                                 <h3>Crie sua Conta</h3>
@@ -78,7 +78,7 @@
                                 <div class="telefone">
                                     <span>Telefone*</span>
                                     <mat-form-field appearance="outline" class="text-input">
-                                        <input matInput formControlName="telefone" placeholder="0000-0000" mask="00000-0000" class="input">        
+                                        <input matInput formControlName="telefone" placeholder="0000-0000" mask="0000-0000" class="input">        
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -96,9 +96,10 @@
                                 <div class="ong">
                                     <span>Selecione a Ong*</span>
                                     <mat-form-field appearance="outline">
-                                        <mat-select>
-                                            @for(ong of ongs ; track ong.name){
-                                                <mat-option [value]="ong.name">
+                                        <mat-label>Selecione</mat-label>
+                                        <mat-select formControlName="ongId">
+                                            @for(ong of ongs ; track ong.id){
+                                                <mat-option [value]="ong.id">
                                                     {{ong.name}}
                                                 </mat-option>
                                             }

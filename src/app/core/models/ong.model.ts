@@ -7,5 +7,5 @@ export interface Ong{
     email : string,
     ddd : string,
     phone : string,
-    address : Address
+    addressDto : Address
 }
