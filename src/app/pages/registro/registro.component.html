@@ -15,7 +15,20 @@
         </div>
         <div class="formContainer">
             <div class="formCard">
-                <form [formGroup]="usuarioForm">
+                <div class="toggle-group">
+                    <mat-button-toggle-group
+                    [(ngModel)]="role"
+                    aria-label="Select your role"
+                    >
+                    <mat-button-toggle value="user" >
+                        Quero adotar!
+                    </mat-button-toggle>
+                    <mat-button-toggle value="tutor">
+                        Sou tutor
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+                </div>
+                <form [formGroup]="formAtual">
                         <div class="formTitle">
                             <div class="h1">
                                 <h3>Crie sua Conta</h3>
@@ -24,19 +37,7 @@
                                 <h5>Preencha os campos abaixo para se cadastrar.</h5>
                             </div>
                         </div>
-                       <div class="toggle-group">
-                         <mat-button-toggle-group
-                            formControlName="role"
-                            aria-label="Select your role"
-                            >
-                            <mat-button-toggle value="user" >
-                                Quero adotar!
-                            </mat-button-toggle>
-                            <mat-button-toggle value="tutor">
-                                Sou tutor
-                            </mat-button-toggle>
-                        </mat-button-toggle-group>
-                       </div>
+                     
                         <div class="formContent">
                             <div class="form-row-cols-2">
                                 <div>
@@ -81,7 +82,7 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            @if(usuarioForm.get('role')!.value === 'tutor'){
+                            @if(role === 'tutor'){
                                 <div class="form-row-cols-2">
                                 <div>
                                     <span>Senha*</span>
@@ -95,18 +96,42 @@
                                 <div class="ong">
                                     <span>Selecione a Ong*</span>
                                     <mat-form-field appearance="outline">
-                                        <mat-select>
-                                            @for(ong of ongs ; track ong.name){
-                                                <mat-option [value]="ong.name">
+                                        <mat-label>Selecione</mat-label>
+                                        <mat-select formControlName="ongId">
+                                            @for(ong of ongs ; track ong.id){
+                                                <mat-option [value]="ong.id">
                                                     {{ong.name}}
                                                 </mat-option>
                                             }
                                         </mat-select>
                                     </mat-form-field>
-                                    <span>Não encontrou sua Ong? <a href="localhost:4200/registro-ong">Cadastre-a!</a></span>
+                                    <div class="add-button-div">
+                                        <span>Não encontrou sua ONG?</span>
+                                        <button mat-icon-button class="add-button" (click)="openModal()"> <mat-icon>add</mat-icon></button>
+                                    </div>
                                 </div>
                             </div>
                             }@else {
+                            <div class="form-row">
+                                <span>Estilo de vida</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <textarea matInput formControlName="lifestyle" placeholder="Seu estilo de vida" class="input" rows="1"></textarea>
+                                <mat-error
+                                    *ngIf="formAtual.get('lifestyle')?.hasError('maxlength') && formAtual.get('lifestyle')?.touched">
+                                    Máximo de 100 caracteres.
+                                </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-row">
+                                <span>Estilo de vida</span>
+                                <mat-form-field appearance="outline" class="text-input">
+                                    <textarea matInput formControlName="preferences" placeholder="Suas preferências" class="input" rows="1"></textarea>
+                                <mat-error
+                                    *ngIf="formAtual.get('preferences')?.hasError('maxlength') && formAtual.get('preference')?.touched">
+                                    Máximo de 100 caracteres.
+                                </mat-error>
+                                </mat-form-field>
+                            </div>
                             <div class="form-row">
                                 <span>Senha*</span>
                                 <mat-form-field appearance="outline" class="text-input">
@@ -117,9 +142,6 @@
                                 </mat-form-field>
                             </div>
                             }
-                            
-                             
-                            
                         </div>
                     </form>
                 <div class="buttons">

@@ -1,0 +1,94 @@
+
+
+<div class="header">
+  <H1>Cadastre sua ONG</H1>
+</div>
+<form [formGroup]="ongForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Nome da ONG</mat-label>
+        <input matInput formControlName="name"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>CNPJ</mat-label>
+        <input matInput formControlName="cnpj" placeholder="00.000.000/0000-00" mask="00.000.000/0000-00"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="field full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="field small">
+        <mat-label>DDD</mat-label>
+        <input matInput formControlName="ddd" mask="00"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="phone" placeholder="0000-0000" mask="0000-0000"/>
+      </mat-form-field>
+    </div>
+
+    <div formGroupName="addressDto">
+      <div class="row">
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>CEP</mat-label>
+          <input matInput formControlName="cep" mask="00000-000"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field small">
+          <mat-label>UF</mat-label>
+          <input matInput formControlName="uf" [readonly]="blockFields"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field small">
+          <mat-label>Número</mat-label>
+          <input matInput formControlName="numero" mask="0000" />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="cidade" [readonly]="blockFields"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="bairro" [readonly]="blockFields"/>
+        </mat-form-field>
+      </div>
+
+      <div class="row-address">
+        <mat-form-field appearance="outline" class="field full-width">
+          <mat-label>Logradouro</mat-label>
+          <input matInput formControlName="logradouro" [readonly]="blockFields"/>
+        </mat-form-field>
+         <mat-form-field appearance="outline" class="field full-width">
+          <mat-label>Complemento</mat-label>
+          <input matInput formControlName="complemento" />
+        </mat-form-field>
+      </div>
+
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <div>
+      <button mat-flat-button class="close-btn" type="button" (click)="onCancel()">
+        Fechar
+      </button>
+      <button mat-flat-button class="send-btn" type="submit">
+        Salvar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>
