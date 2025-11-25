@@ -67,7 +67,10 @@ export class AnimaisService {
     return this.http.put<Animal>(`${this.apiUrl}/status`, dto);
   }
 
-
-
-
+  // =============================
+  //      DELETE ANIMAL
+  // =============================
+  deleteAnimal(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { withCredentials: true });
+  }
 }

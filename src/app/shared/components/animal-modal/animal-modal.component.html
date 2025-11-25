@@ -43,24 +43,37 @@
     </button>
   </div>
 
-  <!-- Editor de status manual para tutor (ONG) -->
+  <!-- Editor de status manual para tutor (ONG) + botão deletar -->
   <div class="adopt-section edit-status"
        *ngIf="canEditStatus()">
     <div class="status-editor">
-      <span class="label">Atualizar status:</span>
+      <div class="esquerda">
+        <span class="label">Atualizar status:</span>
 
-      <select [(ngModel)]="newStatus">
-        <option *ngFor="let s of statusOptionsTutor" [value]="s">
-          {{ s }}
-        </option>
-      </select>
+        <select [(ngModel)]="newStatus">
+          <option *ngFor="let s of statusOptionsTutor" [value]="s">
+            {{ s }}
+          </option>
+        </select>
 
-      <button mat-stroked-button
-              color="primary"
-              (click)="updateStatusManual()"
-              [disabled]="newStatus === data.animal.status">
-        Salvar
-      </button>
+        <button mat-stroked-button
+                color="primary"
+                (click)="updateStatusManual()"
+                [disabled]="newStatus === data.animal.status">
+          Salvar
+        </button>
+      </div>
+
+      <div class="direita">
+        <!-- Ícone de lixeira só pro tutor -->
+        <button mat-icon-button
+                *ngIf="canDelete()"
+                class="delete-icon"
+                (click)="deleteAnimal()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
     </div>
   </div>
 
