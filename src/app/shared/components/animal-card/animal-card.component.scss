@@ -49,16 +49,25 @@
       color: #fff;
       text-transform: capitalize;
 
-      &.adotado {
-        background: #4caf50;
+      &.status-available {
+        background: #4caf50; // verde
       }
 
-      &.disponivel {
-        background: var(--primary-purple);
+      &.status-pending {
+        background: #ffcc00; // amarelo
+        color: #333;
       }
 
-      &.indisponivel {
-        background: #f44336;
+      &.status-adopted {
+        background: var(--primary-purple); // roxo app
+      }
+
+      &.status-lost {
+        background: #ff9800; // laranja
+      }
+
+      &.status-deceased {
+        background: #f44336; // vermelho
       }
     }
   }

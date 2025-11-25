@@ -16,13 +16,11 @@
   </div>
 
   <div class="right" *ngIf="role === Roles.USER">
-    <button class="btn" (click)="abrirPerfil()">Meu Perfil</button>
     <button class="btn" (click)="logout()">Sair</button>
 
   </div>
 
   <div class="right" *ngIf="role === Roles.ONG">
-    <button class="btn" (click)="abrirPerfil()">Meu Perfil</button>
     <button class="btn" (click)="cadastrarAnimal()">+ Cadastrar Animal</button>
     <button class="btn" (click)="logout()">Sair</button>
   </div>

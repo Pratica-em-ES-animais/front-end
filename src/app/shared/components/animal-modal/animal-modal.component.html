@@ -3,7 +3,7 @@
 
     <div class="image-section">
       <img [src]="getPhoto()" [alt]="data.animal.name" />
-      <span class="status-tag" [class]="data.animal.status.toLowerCase()">
+      <span class="status-tag" [ngClass]="getStatusClass()">
         {{ data.animal.status }}
       </span>
     </div>
@@ -34,6 +34,34 @@
     <button mat-flat-button color="primary" class="adopt-btn" (click)="createAdoption()">
       Adotar {{ data.animal.name }}
     </button>
+  </div>
+
+  <div class="adopt-section"
+       *ngIf="data.role === 'ONG' && currentUser?.id === data.animal.tutorIds[0] && data.animal.status === 'PENDING'">
+    <button mat-flat-button color="primary" class="adopt-btn" (click)="confirmarAdocao()">
+      Confirmar Adoção de {{ data.animal.name }}
+    </button>
+  </div>
+
+  <!-- Editor de status manual para tutor (ONG) -->
+  <div class="adopt-section edit-status"
+       *ngIf="canEditStatus()">
+    <div class="status-editor">
+      <span class="label">Atualizar status:</span>
+
+      <select [(ngModel)]="newStatus">
+        <option *ngFor="let s of statusOptionsTutor" [value]="s">
+          {{ s }}
+        </option>
+      </select>
+
+      <button mat-stroked-button
+              color="primary"
+              (click)="updateStatusManual()"
+              [disabled]="newStatus === data.animal.status">
+        Salvar
+      </button>
+    </div>
   </div>
 
   <div class="adopt-section nolog" *ngIf="data.role === null">
