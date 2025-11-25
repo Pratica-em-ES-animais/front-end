@@ -16,6 +16,19 @@
         <input matInput formControlName="name" />
       </mat-form-field>
 
+      @if (userRole === 'ONG') {
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="all">
+            <mat-option [value]="true">
+              Todos
+            </mat-option>
+            <mat-option [value]="false">
+              Meus animais
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      }
+
       <!-- Espécie -->
       <mat-form-field appearance="outline">
         <mat-label>Espécie</mat-label>
