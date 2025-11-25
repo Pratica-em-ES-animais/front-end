@@ -49,13 +49,20 @@
         text-transform: capitalize;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 
-        &.adotado {
+        &.status-available {
           background: #4caf50;
         }
-        &.disponivel {
+        &.status-pending {
+          background: #ffcc00;
+          color: #333;
+        }
+        &.status-adopted {
           background: var(--primary-purple);
         }
-        &.indisponivel {
+        &.status-lost {
+          background: #ff9800;
+        }
+        &.status-deceased {
           background: #f44336;
         }
       }
@@ -69,7 +76,6 @@
       gap: 1rem;
       overflow-y: auto;
       background-color: var(--primary-offwhite);
-
 
       h2 {
         color: var(--primary-purple);
@@ -113,7 +119,31 @@
     transition: all 0.3s ease;
 
     &.nolog {
-      background: var(--third-purple); 
+      background: var(--third-purple);
+    }
+
+    &.edit-status {
+      background: #f5f0ff;
+
+      .status-editor {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+
+        .label {
+          font-weight: 500;
+          color: var(--primary-purple);
+        }
+
+        select {
+          padding: 6px 10px;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          font-size: 0.95rem;
+        }
+      }
     }
 
     .adopt-btn {

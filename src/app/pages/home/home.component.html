@@ -30,12 +30,12 @@
         <div class="third-content">
             <div class="animal" *ngFor="let a of animais">
             <div class="animal-pfp">
-                <img class="img" [src]="a.foto" [alt]="a.nome" />
+                <img class="img" [src]="getPhoto(a)" [alt]="a.name" />
             </div>
             <div class="animal-content">
-                <h3 class="h3">{{ a.nome }}</h3>
-                <p class="p">{{ a.especie }} — {{ a.idade }} anos</p>
-                <p class="p">{{ a.descricao }}</p>
+                <h3 class="h3">{{ a.name }}</h3>
+                <p class="p">{{ a.species }} — {{ a.age }} anos</p>
+                <p class="p">{{ a.description }}</p>
             </div>
             </div>
         </div>

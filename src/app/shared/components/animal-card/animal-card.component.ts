@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { Animal } from '../../../core/models/animal.model';
-import { UserRole } from '../../../core/services/user-state.service';
 import { AnimalModalComponent } from '../animal-modal/animal-modal.component';
 import { AnimaisService } from '../../../core/services/animais.service';
 import { Role } from '../../../core/models/role.model';
@@ -36,7 +35,7 @@ export class AnimalCardComponent {
 
   getPhoto(): string {
     if (!this.animal.photo) {
-      return 'assets/img/no-photo.png'; // opcional
+      return 'assets/img/no-photo.png';
     }
     return this.animaisService.getPhotoUrl(this.animal.photo);
   }
@@ -52,10 +51,22 @@ export class AnimalCardComponent {
     });
   }
 
+  getStatusClass(): string {
+    const map: Record<string, string> = {
+      AVAILABLE: 'status-available',
+      PENDING: 'status-pending',
+      ADOPTED: 'status-adopted',
+      LOST: 'status-lost',
+      DECEASED: 'status-deceased'
+    };
+
+    return map[this.animal.status] ?? 'status-available';
+  }
+
   // =============================
   //  MAPEAR ENUMS DO BACKEND → PT-BR
   // =============================
-    formatEnum(value: string): string {
+  formatEnum(value: string): string {
     const map: Record<string, string> = {
       Cachorro: 'Cachorro',
       Gato: 'Gato',
@@ -108,5 +119,4 @@ export class AnimalCardComponent {
 
     return map[value] ?? value;
   }
-
 }

@@ -3,7 +3,7 @@
 
   <div class="photo-wrapper">
     <img [src]="getPhoto()" [alt]="animal.name" />
-    <span class="status-tag" [class]="animal.status.toLowerCase()">
+    <span class="status-tag" [ngClass]="getStatusClass()">
       {{ animal.status }}
     </span>
   </div>
@@ -11,9 +11,9 @@
   <div class="animal-info">
     <h3>{{ animal.name }}</h3>
 
-  <p class="species">
-    {{ formatEnum(animal.species) }} • {{ getBreed() }}
-  </p>
+    <p class="species">
+      {{ formatEnum(animal.species) }} • {{ getBreed() }}
+    </p>
 
     <div class="tags">
       <span class="tag">{{ animal.age }} anos</span>

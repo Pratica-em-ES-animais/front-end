@@ -1,15 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-
-interface Animal {
-  nome: string;
-  especie: 'Gato' | 'Cachorro';
-  idade: number;
-  foto: string;
-  descricao: string;
-}
+import { AnimaisService } from '../../core/services/animais.service';
+import { Animal } from '../../core/models/animal.model';
 
 @Component({
   selector: 'app-home',
@@ -18,59 +12,42 @@ interface Animal {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  constructor(private router:Router){
-  }
-  animais: Animal[] = [
-    {
-      nome: 'Luna',
-      especie: 'Gato',
-      idade: 2,
-      foto: 'https://cataas.com/cat?width=200&height=200&random=1',
-      descricao: 'Gata curiosa e dorminhoca.'
-    },
-    {
-      nome: 'Thor',
-      especie: 'Cachorro',
-      idade: 4,
-      foto: 'https://placedog.net/200/200',
-      descricao: 'Cachorro leal e protetor.'
-    },
-    {
-      nome: 'Nina',
-      especie: 'Gato',
-      idade: 3,
-      foto: 'https://cataas.com/cat?width=200&height=200&random=2',
-      descricao: 'Adora janelas e mimos.'
-    },
-    {
-      nome: 'Max',
-      especie: 'Cachorro',
-      idade: 5,
-      foto: 'https://placedog.net/201/200',
-      descricao: 'Ama correr e brincar com bola.'
-    },
-    {
-      nome: 'Mia',
-      especie: 'Gato',
-      idade: 1,
-      foto: 'https://cataas.com/cat?width=200&height=200&random=3',
-      descricao: 'Pequena, carinhosa e muito esperta.'
-    },
-    {
-      nome: 'Rex',
-      especie: 'Cachorro',
-      idade: 6,
-      foto: 'https://placedog.net/202/200',
-      descricao: 'Grandão, tranquilo e muito amigo.'
-    }
-  ];
+export class HomeComponent implements OnInit {
 
-  redirectTo(address:string){
+  animais: Animal[] = [];
+
+  constructor(
+    private router: Router,
+    private animaisService: AnimaisService
+  ) {}
+
+  ngOnInit(): void {
+    this.animaisService.getAll().subscribe({
+      next: (lista) => {
+        this.animais = this.sortear(lista, 6);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  // 🔹 Sorteia N animais aleatórios
+  private sortear(lista: Animal[], n: number): Animal[] {
+    return lista.sort(() => Math.random() - 0.5).slice(0, n);
+  }
+
+  // 🔥 Igual ao animal-modal.component.ts
+  getPhoto(a: Animal): string {
+    if (!a.photo) {
+      return 'assets/img/no-photo.png';
+    }
+    return this.animaisService.getPhotoUrl(a.photo);
+  }
+
+  redirectTo(address: string) {
     this.router.navigate([`/${address}`]);
   }
 
   login() {
-   this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 }

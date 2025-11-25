@@ -104,11 +104,19 @@
         <button mat-stroked-button color="warn" (click)="limpar()">Limpar</button>
       </div>
 
-      <ng-container *ngIf="userRole === 'USER'">
-        <button mat-flat-button color="accent">
-          Usar IA de compatibilidade
-        </button>
-      </ng-container>
+    <ng-container *ngIf="userRole === 'USER'">
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="usarIA()">
+        Usar IA de compatibilidade
+      </button>
+
+      <div class="ia-hint" *ngIf="usandoIA">
+        Mostrando animais ordenados por compatibilidade com você (IA).
+      </div>
+    </ng-container>
+
 
     </form>
 

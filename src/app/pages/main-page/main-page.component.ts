@@ -14,6 +14,8 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { AnimalCardComponent } from '../../shared/components/animal-card/animal-card.component';
 import { UserLogin } from '../../core/models/user-login.model';
 import { Role } from '../../core/models/role.model';
+import { FilterService } from '../../core/services/filter.service';
+import { CompatibilityResult } from '../../core/models/compatibilityResult.dto';
 
 @Component({
   selector: 'app-main-page',
@@ -44,22 +46,24 @@ export class MainPageComponent implements OnInit {
 
   especies = ['Cachorro', 'Gato'];
   sexos = ['M', 'F'];
-  tamanhos = ['Pequeno', 'Médio', 'Grande', 'Gigante'];
-  energias = ['Baixa', 'Média', 'Alta'];
-  temperamentos = ['Dócil', 'Normal', 'Imprevisível', 'Agressivo'];
-  sociabilidades = ['Introvertido', 'Normal', 'Sociável'];
+  tamanhos = ['Pequeno', 'Medio', 'Grande', 'Gigante'];
+  energias = ['Baixa', 'Media', 'Alta'];
+  temperamentos = ['Docil', 'Normal', 'Imprevisivel', 'Agressivo'];
+  sociabilidades = ['Introvertido', 'Normal', 'Sociavel'];
   status = ['AVAILABLE', 'ADOPTED', 'PENDING', 'LOST', 'DECEASED'];
 
     racas: Record<'Gato' | 'Cachorro', string[]> = {
-      Gato: ['SRD', 'Persa', 'Siamês', 'Maine Coon', 'Angorá'],
-      Cachorro: ['SRD', 'Labrador', 'Poodle', 'Bulldog', 'Golden Retriever', 'Shih Tzu', 'Vira-lata']
+      Gato: ['PERSA', 'SIAMES', 'MAINE_COON', 'SPHYNX', 'ANGORA', 'BENGAL', 'BRITISH_SHORTHAIR'],
+      Cachorro: ['VIRA_LATA', 'LABRADOR', 'POODLE', 'BULLDOG', 'GOLDEN_RETRIEVER', 'PINSCHER', 'SHIH_TZU', 'PASTOR_ALEMAO', 'SRD']
     };
 
-  
+  usandoIA = false;
+
   constructor(
     private fb: FormBuilder,
     private animaisService: AnimaisService,
-    private userState: UserStateService
+    private userState: UserStateService,
+    private filterService: FilterService 
   ) {}
 
 ngOnInit(): void {
@@ -145,6 +149,29 @@ filtrar(): void {
     });
   }
 
+  usarIA(): void {
+      this.usandoIA = true;
+
+      this.filterService.getCompatiblePets().subscribe({
+        next: (results: CompatibilityResult[]) => {
+          // Ordena por score decrescente, se já não vier ordenado
+          results.sort((a, b) => b.score - a.score);
+
+          // Atualiza a listagem apenas com os pets retornados
+          this.animaisFiltrados = results.map(r => r.pet);
+
+          // (opcional) se você quiser ver o score no console
+          console.table(results.map(r => ({
+            name: r.pet.name,
+            score: r.score
+          })));
+        },
+        error: (err) => {
+          console.error('Erro ao usar IA de compatibilidade', err);
+          this.usandoIA = false;
+        }
+      });
+    }
 
   limpar(): void {
     this.form.reset({
@@ -162,6 +189,7 @@ filtrar(): void {
       status: ''
     });
 
+    this.usandoIA = false;
     this.racasFiltradas = [];
     this.animaisFiltrados = [...this.animais];
   }

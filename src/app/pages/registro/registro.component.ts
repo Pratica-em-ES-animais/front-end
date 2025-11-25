@@ -54,7 +54,7 @@ export class RegistroComponent implements OnInit{
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
       ddd: [null, [Validators.required, Validators.pattern('[0-9]{2}')]],
-      telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]],
+      telefone: [null, [Validators.required, Validators.pattern('[0-9]{8,9}')]],
       lifestyle: [null, [Validators.required, Validators.maxLength(100)]],
       preferences: [null, [Validators.required, Validators.maxLength(100)]]
     });
@@ -66,7 +66,7 @@ export class RegistroComponent implements OnInit{
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
       ddd: [null, [Validators.required, Validators.pattern('[0-9]{2}')]],
-      telefone: [null, [Validators.required, Validators.pattern('[0-9]{9}')]],
+      telefone: [null, [Validators.required, Validators.pattern('[0-9]{8}')]],
       ongId : [null, [Validators.required]]
     });
 

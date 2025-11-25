@@ -52,4 +52,22 @@ export class AnimaisService {
   getPhotoUrl(filename: string): string {
     return `${this.apiUrl}/photo/${filename}`;
   }
+
+  // =============================
+  //      UPDATE ANIMAL
+  // =============================
+  updateAnimal(id: string, animal: Partial<Animal>): Observable<Animal> {
+    return this.http.put<Animal>(`${this.apiUrl}/update/${id}`, animal);
+  }
+
+  // =============================
+  //      UPDATE STATUS
+  // =============================
+  updateStatus(dto: { animalId: string; status: string }): Observable<Animal> {
+    return this.http.put<Animal>(`${this.apiUrl}/status`, dto);
+  }
+
+
+
+
 }

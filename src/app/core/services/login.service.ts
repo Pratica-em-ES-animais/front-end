@@ -16,15 +16,23 @@ export class LoginService {
   constructor(private client : HttpClient) {
   }
 
-  login(user : Login) : Observable<UserLogin>{
-     return this.client.post<UserLogin>(this.url, user)
-        .pipe(
-        tap(user =>{
-          this.currentUserSubject.next(user);
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        })
-      )
+  // login.service.ts
+  login(user: Login): Observable<UserLogin> {
+    return this.client.post<UserLogin>(
+      this.url,
+      user,
+      {
+        withCredentials: true          // ⬅⬅⬅ ESSENCIAL
+      }
+    ).pipe(
+      tap(user => {
+        this.currentUserSubject.next(user);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      })
+    );
   }
+
+
 
   logout(){
     this.currentUserSubject.next(null);
