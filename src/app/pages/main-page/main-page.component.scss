@@ -5,7 +5,7 @@
   background-color: var(--primary-offwhite);
 
   .sidebar {
-    width: 250px; // pode ajustar conforme quiser
+    width: 250px; 
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -86,7 +86,7 @@
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; // ⬅️ muda de center para flex-start
+  justify-content: flex-start; 
   align-content: flex-start;
   gap: 20px;
 }

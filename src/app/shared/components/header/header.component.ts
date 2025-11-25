@@ -44,9 +44,8 @@ cadastrarAnimal() {
       panelClass: 'custom-modal',
     });
 
-    // 🔥 Quando fechar o modal
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {     // qualquer valor indica que o modal fechou com sucesso
+      if (result) { 
         this.animalCadastrado.emit();
       }
     });

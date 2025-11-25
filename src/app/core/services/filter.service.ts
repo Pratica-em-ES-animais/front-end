@@ -13,13 +13,12 @@ export class FilterService {
 
   constructor(private http: HttpClient) { }
 
-// filter.service.ts
 getCompatiblePets(): Observable<CompatibilityResult[]> {
   return this.http.post<CompatibilityResult[]>(
     'http://localhost:8080/api/filter',
     {},
     {
-      withCredentials: true          // ⬅⬅⬅ ESSENCIAL TAMBÉM
+      withCredentials: true
     }
   );
 }

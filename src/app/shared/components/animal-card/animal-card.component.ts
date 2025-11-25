@@ -80,42 +80,31 @@ export class AnimalCardComponent {
     return map[this.animal.status] ?? 'status-available';
   }
 
-
-
-  // =============================
-  //  MAPEAR ENUMS DO BACKEND → PT-BR
-  // =============================
   formatEnum(value: string): string {
     const map: Record<string, string> = {
       Cachorro: 'Cachorro',
       Gato: 'Gato',
 
-      // Sex
       M: 'Macho',
       F: 'Fêmea',
 
-      // Size
       Pequeno: 'Pequeno',
       Medio: 'Médio',
       Grande: 'Grande',
       Gigante: 'Gigante',
 
-      // Temperament
       Docil: 'Dócil',
       Normal: 'Normal',
       Imprevisivel: 'Imprevisível',
       Agitado: 'Agitado',
 
-      // Energy
       Baixa: 'Baixa',
       Media: 'Média',
       Alta: 'Alta',
 
-      // Sociability
       Introvertido: 'Introvertido',
       Sociavel: 'Sociável',
 
-      // DOG BREEDS
       VIRA_LATA: 'Vira-lata',
       LABRADOR: 'Labrador',
       POODLE: 'Poodle',
@@ -126,7 +115,6 @@ export class AnimalCardComponent {
       PASTOR_ALEMAO: 'Pastor Alemão',
       SRD: 'Sem raça definida',
 
-      // CAT BREEDS
       PERSA: 'Persa',
       SIAMES: 'Siamês',
       MAINE_COON: 'Maine Coon',

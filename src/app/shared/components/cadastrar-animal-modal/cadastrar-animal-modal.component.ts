@@ -115,7 +115,6 @@ export class CadastrarAnimalModalComponent {
     cat?.updateValueAndValidity();
   }
 
-  // ==== Upload da Imagem ====
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.selectedFile = file;
@@ -148,9 +147,6 @@ export class CadastrarAnimalModalComponent {
     reader.readAsDataURL(file);
   }
 
-  // ============================
-  // ==== SUBMIT COMPLETO =======
-  // ============================
 async submit() {
   if (this.animalForm.invalid) {
     this.animalForm.markAllAsTouched();
@@ -189,25 +185,13 @@ async submit() {
       tutorIds: [tutor.id]
     };
 
-    // =============================
-    // LOG 1: O QUE ESTÁ INDO PARA O CREATE
-    // =============================
-    console.log("▶️ ENVIANDO PARA /create:", JSON.stringify(animalToCreate, null, 2));
-
-    // 1) Criar registro sem foto
     const createdAnimal = await firstValueFrom(
       this.animaisService.createAnimal(animalToCreate)
     );
 
-    // =============================
-    // LOG 2: RESPOSTA DO BACKEND
-    // =============================
-    console.log("✔️ RESPOSTA DO /create:", createdAnimal);
-
-    // 2) Upload da foto
     let uploadedFilename = '';
     if (this.selectedFile) {
-      console.log("▶️ ENVIANDO FOTO PARA /upload-photo:", this.selectedFile);
+      console.log("▶ENVIANDO FOTO PARA /upload-photo:", this.selectedFile);
 
       const uploadResp = await firstValueFrom(
         this.animaisService.uploadPhoto(createdAnimal.id, this.selectedFile)
@@ -223,7 +207,7 @@ async submit() {
     this.dialogRef.close(true);
 
   } catch (err) {
-    console.error("❌ ERRO AO CRIAR ANIMAL:", err);
+    console.error("ERRO AO CRIAR ANIMAL:", err);
   }
 }
 

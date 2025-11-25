@@ -27,7 +27,6 @@ export class AnimalModalComponent {
 
   public currentUser: { id: string } | null = null;
 
-  // status que o tutor pode setar manualmente
   tutorOptions : string[] = ['AVAILABLE', 'LOST', 'DECEASED'];
   statusOptionsTutor: Record<string,string> = {
     AVAILABLE : 'DISPONÍVEL',
@@ -91,7 +90,6 @@ export class AnimalModalComponent {
     return map[status] ?? 'status-available';
   }
 
-  // Conversão dos enums — igual ao card
   formatEnum(value: string): string {
     const map: Record<string, string> = {
       Cachorro: 'Cachorro',
@@ -141,14 +139,12 @@ export class AnimalModalComponent {
 
     const adoptionDto = { animalId, tutorId, adopterId };
 
-    console.log("📤 Enviando DTO para /api/adoption/create:", adoptionDto);
-
     this.adoptionService.createAdoption(adoptionDto).subscribe({
       next: (response) => {
         this.dialogRef.close(true);
       },
       error: (err) => {
-        console.error("❌ Erro ao criar adoção:", err);
+        console.error("Erro ao criar adoção:", err);
         if (err.error) {
           console.error("Detalhes do erro retornado pelo backend:", err.error);
         }
@@ -164,12 +160,11 @@ export class AnimalModalComponent {
     console.log(dto);
     this.animaisService.updateStatus(dto).subscribe({
       next: () => {
-        console.log("🐶 Status do animal atualizado para 'ADOPTED'");
         this.data.animal.status = StatusPet.ADOPTED;
         this.dialogRef.close(true);
       },
       error: (err) => {
-        console.error("❌ Erro ao atualizar status:", err);
+        console.error("Erro ao atualizar status:", err);
       }
     });
   }
@@ -193,11 +188,10 @@ export class AnimalModalComponent {
 
     this.animaisService.updateStatus(dto).subscribe({
       next: (updatedAnimal) => {
-        console.log('✅ Status atualizado:', updatedAnimal);
         this.data.animal.status = updatedAnimal.status ?? this.newStatus;
       },
       error: (err) => {
-        console.error('❌ Erro ao atualizar status manualmente:', err);
+        console.error('Erro ao atualizar status manualmente:', err);
       }
     });
   }
@@ -209,11 +203,11 @@ export class AnimalModalComponent {
 
     this.animaisService.deleteAnimal(this.data.animal.id).subscribe({
       next: () => {
-        console.log("🗑️ Animal deletado com sucesso");
-        this.dialogRef.close(true); // fecha modal e retorna evento
+        console.log("Animal deletado com sucesso");
+        this.dialogRef.close(true);
       },
       error: (err) => {
-        console.error("❌ Erro ao deletar animal:", err);
+        console.error("Erro ao deletar animal:", err);
         alert("Erro ao deletar animal: " + (err.error || "Tente novamente."));
       }
     });

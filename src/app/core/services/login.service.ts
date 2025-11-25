@@ -16,13 +16,12 @@ export class LoginService {
   constructor(private client : HttpClient) {
   }
 
-  // login.service.ts
   login(user: Login): Observable<UserLogin> {
     return this.client.post<UserLogin>(
       this.url,
       user,
       {
-        withCredentials: true          // ⬅⬅⬅ ESSENCIAL
+        withCredentials: true
       }
     ).pipe(
       tap(user => {

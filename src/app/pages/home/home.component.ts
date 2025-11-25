@@ -30,12 +30,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // 🔹 Sorteia N animais aleatórios
   private sortear(lista: Animal[], n: number): Animal[] {
     return lista.sort(() => Math.random() - 0.5).slice(0, n);
   }
 
-  // 🔥 Igual ao animal-modal.component.ts
   getPhoto(a: Animal): string {
     if (!a.photo) {
       return 'assets/img/no-photo.png';

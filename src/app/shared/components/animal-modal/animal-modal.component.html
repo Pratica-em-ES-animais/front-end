@@ -43,7 +43,6 @@
     </button>
   </div>
 
-  <!-- Editor de status manual para tutor (ONG) + botão deletar -->
   <div class="adopt-section edit-status"
        *ngIf="canEditStatus()">
     <div class="status-editor">
@@ -67,7 +66,6 @@
       </div>
 
       <div class="direita">
-        <!-- Ícone de lixeira só pro tutor -->
         <button mat-icon-button
                 *ngIf="canDelete()"
                 class="delete-icon"

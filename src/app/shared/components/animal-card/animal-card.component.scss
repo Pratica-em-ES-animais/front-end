@@ -50,24 +50,24 @@
       text-transform: capitalize;
 
       &.status-available {
-        background: #4caf50; // verde
+        background: #4caf50;
       }
 
       &.status-pending {
-        background: #ffcc00; // amarelo
+        background: #ffcc00; 
         color: #333;
       }
 
       &.status-adopted {
-        background: var(--primary-purple); // roxo app
+        background: var(--primary-purple); 
       }
 
       &.status-lost {
-        background: #ff9800; // laranja
+        background: #ff9800;
       }
 
       &.status-deceased {
-        background: #f44336; // vermelho
+        background: #f44336;
       }
     }
   }

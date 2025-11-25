@@ -25,7 +25,6 @@
     align-items: stretch;
   }
 
-  /* 🔹 Lado esquerdo dividido em duas partes */
   .left-side {
     flex: 0.5;
     display: flex;
@@ -96,7 +95,6 @@
     }
   }
 
-  /* 🔹 Lado direito */
   .right-side {
     flex: 0.5;
     display: flex;
@@ -135,7 +133,6 @@
   }
 }
 
-/* 🔧 Largura total do modal */
 ::ng-deep .cdk-overlay-pane .mat-mdc-dialog-container.custom-modal {
   width: calc(100vw - 64px) !important;
   max-width: calc(100vw - 64px) !important;

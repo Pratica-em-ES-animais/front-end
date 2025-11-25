@@ -161,13 +161,10 @@ filtrar(): void {
 
       this.filterService.getCompatiblePets().subscribe({
         next: (results: CompatibilityResult[]) => {
-          // Ordena por score decrescente, se já não vier ordenado
           results.sort((a, b) => b.score - a.score);
 
-          // Atualiza a listagem apenas com os pets retornados
           this.animaisFiltrados = results.map(r => r.pet);
 
-          // (opcional) se você quiser ver o score no console
           console.table(results.map(r => ({
             name: r.pet.name,
             score: r.score

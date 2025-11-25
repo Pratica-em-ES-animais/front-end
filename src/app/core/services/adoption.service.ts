@@ -12,9 +12,6 @@ export class AdoptionService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Envia os dados da adoção para o backend e retorna o AdoptionDto criado
-   */
   createAdoption(adoption: AdoptionCreateDto): Observable<AdoptionCreateDto> {
     return this.http.post<AdoptionCreateDto>(`${this.apiUrl}/create`, adoption);
   }

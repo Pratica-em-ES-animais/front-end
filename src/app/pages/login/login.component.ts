@@ -26,7 +26,6 @@ export class LoginComponent {
       password: ['', [Validators.required]]
     });
   }
-  // para apresentar vou redirecionar de uma vez, sem mandar pro back-end.
   submit() {
     if(!this.loginForm.valid){
       console.log('Opa!');

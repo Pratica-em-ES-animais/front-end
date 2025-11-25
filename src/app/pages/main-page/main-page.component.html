@@ -10,7 +10,6 @@
 
     <form [formGroup]="form">
 
-      <!-- Nome -->
       <mat-form-field appearance="outline">
         <mat-label>Nome</mat-label>
         <input matInput formControlName="name" />
@@ -29,7 +28,6 @@
         </mat-form-field>
       }
 
-      <!-- Espécie -->
       <mat-form-field appearance="outline">
         <mat-label>Espécie</mat-label>
         <mat-select formControlName="species">
@@ -39,7 +37,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Raça -->
       <mat-form-field appearance="outline">
         <mat-label>Raça</mat-label>
         <mat-select formControlName="breed">
@@ -49,7 +46,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Sexo -->
       <mat-form-field appearance="outline">
         <mat-label>Sexo</mat-label>
         <mat-select formControlName="sex">
@@ -57,7 +53,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Tamanho -->
       <mat-form-field appearance="outline">
         <mat-label>Tamanho</mat-label>
         <mat-select formControlName="size">
@@ -65,7 +60,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Energia -->
       <mat-form-field appearance="outline">
         <mat-label>Nível de energia</mat-label>
         <mat-select formControlName="energy">
@@ -73,7 +67,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Temperamento -->
       <mat-form-field appearance="outline">
         <mat-label>Temperamento</mat-label>
         <mat-select formControlName="temperament">
@@ -81,7 +74,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Sociabilidade -->
       <mat-form-field appearance="outline">
         <mat-label>Sociabilidade</mat-label>
         <mat-select formControlName="sociability">
@@ -89,7 +81,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Status -->
       <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">
@@ -97,7 +88,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Idade -->
       <div class="age-filter">
         <label>Idade máxima: {{ form.value.age || 20 }} anos</label>
         <mat-slider min="0" max="20" step="1" showTickMarks>
@@ -109,7 +99,6 @@
         </mat-slider>
       </div>
 
-      <!-- Castrado / Vacinado -->
       <mat-checkbox formControlName="neutered">Castrado</mat-checkbox>
       <mat-checkbox formControlName="vaccinated">Vacinado</mat-checkbox>
 
@@ -135,7 +124,6 @@
 
   </div>
 
-  <!-- LISTA DE ANIMAIS -->
   <section class="animals-container">
     <app-animal-card
       *ngFor="let a of animaisFiltrados"

@@ -11,23 +11,14 @@ export class AnimaisService {
 
   constructor(private http: HttpClient) {}
 
-  // =============================
-  //   GET ALL ANIMALS (BACKEND)
-  // =============================
   getAll(): Observable<Animal[]> {
     return this.http.get<Animal[]>(`${this.apiUrl}/pets`);
   }
 
-  // =============================
-  //    CREATE ANIMAL (BACKEND)
-  // =============================
   createAnimal(animal: AnimalCreateDto): Observable<Animal> {
     return this.http.post<Animal>(`${this.apiUrl}/create`, animal);
   }
 
-  // =============================
-  //   UPLOAD DE FOTO COM ID
-  // =============================
   uploadPhoto(animalId: string, file: File): Observable<{
     filename: string;
     url: string;
@@ -46,30 +37,18 @@ export class AnimaisService {
     );
   }
 
-  // =============================
-  //   GET PHOTO URL FORMATTER
-  // =============================
   getPhotoUrl(filename: string): string {
     return `${this.apiUrl}/photo/${filename}`;
   }
 
-  // =============================
-  //      UPDATE ANIMAL
-  // =============================
   updateAnimal(id: string, animal: Partial<Animal>): Observable<Animal> {
     return this.http.put<Animal>(`${this.apiUrl}/update/${id}`, animal);
   }
 
-  // =============================
-  //      UPDATE STATUS
-  // =============================
   updateStatus(dto: { animalId: string; status: string }): Observable<Animal> {
     return this.http.put<Animal>(`${this.apiUrl}/status`, dto);
   }
 
-  // =============================
-  //      DELETE ANIMAL
-  // =============================
   deleteAnimal(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { withCredentials: true });
   }
