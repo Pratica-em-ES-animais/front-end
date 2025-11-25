@@ -12,11 +12,12 @@ import { AnimaisService } from '../../../core/services/animais.service';
 import { Role } from '../../../core/models/role.model';
 import { AdoptionService } from '../../../core/services/adoption.service';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-animal-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, RouterModule, FormsModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, RouterModule, FormsModule, MatIcon],
   templateUrl: './animal-modal.component.html',
   styleUrls: ['./animal-modal.component.scss'],
 })
@@ -184,4 +185,28 @@ export class AnimalModalComponent {
       }
     });
   }
+
+  deleteAnimal() {
+    if (!confirm(`Tem certeza que deseja excluir o animal "${this.data.animal.name}"?`)) {
+      return;
+    }
+
+    this.animaisService.deleteAnimal(this.data.animal.id).subscribe({
+      next: () => {
+        console.log("🗑️ Animal deletado com sucesso");
+        this.dialogRef.close('deleted'); // fecha modal e retorna evento
+      },
+      error: (err) => {
+        console.error("❌ Erro ao deletar animal:", err);
+        alert("Erro ao deletar animal: " + (err.error || "Tente novamente."));
+      }
+    });
+  }
+
+  canDelete(): boolean {
+    return this.data.role === 'ONG'
+        && this.currentUser?.id === this.data.animal.tutorIds[0];
+  }
+
+
 }
