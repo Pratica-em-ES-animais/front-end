@@ -207,7 +207,7 @@ filtrar(): void {
 
   carregarAnimais() {
   this.animaisService.getAll().subscribe({
-    next: (animais) => this.animais = animais,
+    next: (animais) =>{ this.animais = animais; this.animaisFiltrados = animais},
     error: (err) => console.error(err)
   });
 }

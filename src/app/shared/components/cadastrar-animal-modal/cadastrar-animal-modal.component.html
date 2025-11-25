@@ -115,7 +115,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
-              <mat-option *ngFor="let st of statusList" [value]="st">{{ st }}</mat-option>
+              <mat-option *ngFor="let st of statusList" [value]="st">{{ statusMap[st] }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

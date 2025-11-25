@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,6 +17,7 @@ import { StatusPet } from '../../../core/models/status-pet';
 })
 export class AnimalCardComponent {
   @Input() animal!: Animal;
+  @Output() update = new EventEmitter<void>();
   @Input() role: Role | null = null;
 
   public statusLabel: Record<string, string> = {
@@ -33,7 +34,6 @@ export class AnimalCardComponent {
   ) {}
 
   getBreed(): string {
-    console.log(StatusPet[this.animal.status as unknown as keyof typeof StatusPet]);
     if (this.animal.species === 'Cachorro') {
       return this.animal.dogBreed ? this.formatEnum(this.animal.dogBreed) : 'Sem raça';
     }
@@ -51,14 +51,21 @@ export class AnimalCardComponent {
   }
 
   abrirDetalhes() {
-    this.dialog.open(AnimalModalComponent, {
+    const dialogRef = this.dialog.open(AnimalModalComponent, {
       width: '90vw',
       maxWidth: '900px',
       height: 'auto',
       maxHeight: '90vh',
-      data: { animal: this.animal, role: this.role },
+      data: { animal: this.animal, role: this.role},
       panelClass: 'animal-dialog'
     });
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result == true){
+        this.animaisService.getAll().subscribe({
+           next: (res) => this.update.emit(),
+        })
+      }
+    })
   }
 
   getStatusClass(): string {

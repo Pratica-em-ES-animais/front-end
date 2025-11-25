@@ -140,7 +140,8 @@
     <app-animal-card
       *ngFor="let a of animaisFiltrados"
       [animal]="a"
-      [role]="userRole">
+      [role]="userRole"
+      (update)="carregarAnimais()">
     </app-animal-card>
 
     <div *ngIf="animaisFiltrados.length === 0" class="no-results">

@@ -32,10 +32,11 @@ export class AnimalModalComponent {
   statusOptionsTutor: Record<string,string> = {
     AVAILABLE : 'DISPONÍVEL',
     LOST : 'PERDIDO',
-    DECEASED : 'MORTO'
+    DECEASED : 'FALECIDO'
   };
   newStatus: string;
 
+  protected StatusPet = StatusPet;
   public statusLabel: Record<string, string> = {
     AVAILABLE: 'DISPONÍVEL',
     PENDING: 'PENDENTE',
@@ -144,7 +145,7 @@ export class AnimalModalComponent {
 
     this.adoptionService.createAdoption(adoptionDto).subscribe({
       next: (response) => {
-        console.log("Adoção criada:", response);
+        this.dialogRef.close(true);
       },
       error: (err) => {
         console.error("❌ Erro ao criar adoção:", err);
@@ -165,7 +166,7 @@ export class AnimalModalComponent {
       next: () => {
         console.log("🐶 Status do animal atualizado para 'ADOPTED'");
         this.data.animal.status = StatusPet.ADOPTED;
-        this.dialogRef.close('adoptionSuccess');
+        this.dialogRef.close(true);
       },
       error: (err) => {
         console.error("❌ Erro ao atualizar status:", err);
@@ -209,7 +210,7 @@ export class AnimalModalComponent {
     this.animaisService.deleteAnimal(this.data.animal.id).subscribe({
       next: () => {
         console.log("🗑️ Animal deletado com sucesso");
-        this.dialogRef.close('deleted'); // fecha modal e retorna evento
+        this.dialogRef.close(true); // fecha modal e retorna evento
       },
       error: (err) => {
         console.error("❌ Erro ao deletar animal:", err);

@@ -57,6 +57,14 @@ export class CadastrarAnimalModalComponent {
   temperamentos = ['Docil', 'Normal', 'Imprevisivel', 'Agitado'];
   energias = ['Baixa', 'Media', 'Alta'];
   sociabilidades = ['Introvertido', 'Normal', 'Sociavel'];
+
+  statusMap : Record<string,string> = {
+    AVAILABLE : 'DISPONÍVEL',
+    PENDING : 'PENDENTE',
+    ADOPTED : 'ADOTADO',
+    LOST : 'PERDIDO',
+    DECEASED : 'FALECIDO'
+  };
   statusList = ['AVAILABLE', 'PENDING', 'ADOPTED', 'LOST', 'DECEASED'];
 
   constructor(
@@ -212,7 +220,7 @@ async submit() {
 
     createdAnimal.photo = uploadedFilename;
 
-    this.dialogRef.close(createdAnimal);
+    this.dialogRef.close(true);
 
   } catch (err) {
     console.error("❌ ERRO AO CRIAR ANIMAL:", err);

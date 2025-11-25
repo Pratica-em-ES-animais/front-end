@@ -37,7 +37,7 @@
   </div>
 
   <div class="adopt-section"
-       *ngIf="data.role === 'ONG' && currentUser?.id === data.animal.tutorIds[0] && data.animal.status === 'PENDENTE'">
+       *ngIf="data.role === 'ONG' && currentUser?.id === data.animal.tutorIds[0] && data.animal.status === StatusPet.PENDING">
     <button mat-flat-button color="primary" class="adopt-btn" (click)="confirmarAdocao()">
       Confirmar Adoção de {{ data.animal.name }}
     </button>
