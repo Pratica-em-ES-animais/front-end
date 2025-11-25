@@ -70,6 +70,7 @@ ngOnInit(): void {
   this.form = this.fb.group({
     name: [''],
     species: [''],
+    all : [true],
     breed: [''],
     sex: [''],
     age: [0],
@@ -129,9 +130,15 @@ filtrar(): void {
         '';
 
       if (f.name && !a.name.toLowerCase().includes(f.name.toLowerCase())) return false;
+      if (f.all === false) {
+        const currentUserId = this.currentUser?.id;
+        const animaisDoTutorAtual = a.tutorIds?.some(t => t === currentUserId);
+        if (!animaisDoTutorAtual) {
+          return false;
+        }
+      }
       if (f.species && a.species !== f.species) return false;
 
-      // 🔥 Raça corrigida
       if (f.breed && racaAnimal !== f.breed) return false;
 
       if (f.sex && a.sex !== f.sex) return false;
