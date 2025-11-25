@@ -1,3 +1,5 @@
+import { StatusPet } from "./status-pet";
+
 export interface AnimalCreateDto {
   name: string;
 
@@ -36,7 +38,7 @@ export interface AnimalCreateDto {
 
   health_details: string;
   description: string;
-  status: string;
+  status: StatusPet;
 
   tutorIds: string[];
 }

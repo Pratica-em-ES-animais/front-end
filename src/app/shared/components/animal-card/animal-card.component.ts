@@ -6,6 +6,7 @@ import { Animal } from '../../../core/models/animal.model';
 import { AnimalModalComponent } from '../animal-modal/animal-modal.component';
 import { AnimaisService } from '../../../core/services/animais.service';
 import { Role } from '../../../core/models/role.model';
+import { StatusPet } from '../../../core/models/status-pet';
 
 @Component({
   selector: 'app-animal-card',
@@ -18,12 +19,21 @@ export class AnimalCardComponent {
   @Input() animal!: Animal;
   @Input() role: Role | null = null;
 
+  public statusLabel: Record<string, string> = {
+    AVAILABLE: 'DISPONÍVEL',
+    PENDING: 'PENDENTE',
+    ADOPTED: 'ADOTADO',
+    LOST: 'PERDIDO',
+    DECEASED: 'FALECIDO',
+  };
+
   constructor(
     private dialog: MatDialog,
     private animaisService: AnimaisService
   ) {}
 
   getBreed(): string {
+    console.log(StatusPet[this.animal.status as unknown as keyof typeof StatusPet]);
     if (this.animal.species === 'Cachorro') {
       return this.animal.dogBreed ? this.formatEnum(this.animal.dogBreed) : 'Sem raça';
     }
@@ -62,6 +72,8 @@ export class AnimalCardComponent {
 
     return map[this.animal.status] ?? 'status-available';
   }
+
+
 
   // =============================
   //  MAPEAR ENUMS DO BACKEND → PT-BR

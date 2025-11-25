@@ -125,6 +125,8 @@
     &.edit-status {
       background: #f5f0ff;
 
+
+
       .status-editor {
         display: flex;
         align-items: center;
@@ -132,6 +134,12 @@
         gap: 0.75rem;
         flex-wrap: wrap;
 
+        .esquerda{
+          .save-btn{
+            background-color: var(--primary-purple);
+            color: var(--primary-offwhite);
+          }
+        }
         .label {
           font-weight: 500;
           color: var(--primary-purple);

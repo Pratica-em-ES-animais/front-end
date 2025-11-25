@@ -4,7 +4,7 @@
     <div class="image-section">
       <img [src]="getPhoto()" [alt]="data.animal.name" />
       <span class="status-tag" [ngClass]="getStatusClass()">
-        {{ data.animal.status }}
+        {{ statusLabel[data.animal.status] }}
       </span>
     </div>
 
@@ -37,7 +37,7 @@
   </div>
 
   <div class="adopt-section"
-       *ngIf="data.role === 'ONG' && currentUser?.id === data.animal.tutorIds[0] && data.animal.status === 'PENDING'">
+       *ngIf="data.role === 'ONG' && currentUser?.id === data.animal.tutorIds[0] && data.animal.status === 'PENDENTE'">
     <button mat-flat-button color="primary" class="adopt-btn" (click)="confirmarAdocao()">
       Confirmar Adoção de {{ data.animal.name }}
     </button>
@@ -50,14 +50,16 @@
       <div class="esquerda">
         <span class="label">Atualizar status:</span>
 
-        <select [(ngModel)]="newStatus">
-          <option *ngFor="let s of statusOptionsTutor" [value]="s">
-            {{ s }}
-          </option>
-        </select>
+        <mat-select [(ngModel)]="newStatus">
+          @for(s of tutorOptions; track s){
+            <mat-option [value]="s">
+              {{ statusOptionsTutor[s] }}
+            </mat-option>
+          }
+        </mat-select>
 
-        <button mat-stroked-button
-                color="primary"
+        <button mat-flat-button
+                color="var(--primary-purple)"
                 (click)="updateStatusManual()"
                 [disabled]="newStatus === data.animal.status">
           Salvar

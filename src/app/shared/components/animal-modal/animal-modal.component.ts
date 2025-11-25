@@ -13,11 +13,13 @@ import { Role } from '../../../core/models/role.model';
 import { AdoptionService } from '../../../core/services/adoption.service';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from "@angular/material/icon";
+import { StatusPet } from '../../../core/models/status-pet';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-animal-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, RouterModule, FormsModule, MatIcon],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, RouterModule, FormsModule, MatIcon, MatSelectModule],
   templateUrl: './animal-modal.component.html',
   styleUrls: ['./animal-modal.component.scss'],
 })
@@ -26,8 +28,21 @@ export class AnimalModalComponent {
   public currentUser: { id: string } | null = null;
 
   // status que o tutor pode setar manualmente
-  statusOptionsTutor: string[] = ['AVAILABLE', 'LOST', 'DECEASED'];
+  tutorOptions : string[] = ['AVAILABLE', 'LOST', 'DECEASED'];
+  statusOptionsTutor: Record<string,string> = {
+    AVAILABLE : 'DISPONÍVEL',
+    LOST : 'PERDIDO',
+    DECEASED : 'MORTO'
+  };
   newStatus: string;
+
+  public statusLabel: Record<string, string> = {
+    AVAILABLE: 'DISPONÍVEL',
+    PENDING: 'PENDENTE',
+    ADOPTED: 'ADOTADO',
+    LOST: 'PERDIDO',
+    DECEASED: 'FALECIDO',
+  };
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -149,7 +164,7 @@ export class AnimalModalComponent {
     this.animaisService.updateStatus(dto).subscribe({
       next: () => {
         console.log("🐶 Status do animal atualizado para 'ADOPTED'");
-        this.data.animal.status = 'ADOPTED';
+        this.data.animal.status = StatusPet.ADOPTED;
         this.dialogRef.close('adoptionSuccess');
       },
       error: (err) => {

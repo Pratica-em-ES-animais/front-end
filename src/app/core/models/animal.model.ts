@@ -1,3 +1,5 @@
+import { StatusPet } from "./status-pet";
+
 export interface Animal {
   id: string;
   name: string;
@@ -54,7 +56,7 @@ export interface Animal {
   description: string;
 
   // StatusPet
-  status: 'AVAILABLE' | 'PENDING' | 'ADOPTED' | 'LOST' | 'DECEASED';
+  status: StatusPet;
 
   tutorIds: string[];
 }

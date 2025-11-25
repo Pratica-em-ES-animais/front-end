@@ -4,7 +4,7 @@
   <div class="photo-wrapper">
     <img [src]="getPhoto()" [alt]="animal.name" />
     <span class="status-tag" [ngClass]="getStatusClass()">
-      {{ animal.status }}
+      {{ statusLabel[animal.status] }}
     </span>
   </div>
 
